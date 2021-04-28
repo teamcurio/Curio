@@ -64,6 +64,7 @@ module.exports = {
     open: true,
     hot: true,
     publicPath: '/build/',
+    port: 3434,
     proxy: {
       '/' : 'http://localhost:3000/'
     }
