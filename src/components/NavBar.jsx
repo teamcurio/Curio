@@ -3,7 +3,8 @@ import {
   Button
   , Flex
   , Spacer
-  , Input
+  , InputGroup,
+  InputRightElement
   , Box } from "@chakra-ui/react"
 
 class NavBar extends Component {
@@ -11,42 +12,34 @@ class NavBar extends Component {
     // Title
     // Favorites
     return(
-    <div>
     <Flex>
       <Box>
         <Button colorScheme="blue">Favorites</Button>
       </Box>
-      <Spacer />
-      // Genres
+    <Spacer />
+    // Genres
       <Box>
         <Button colorScheme="blue">Genres</Button>
       </Box>
-      // Search
-      <Spacer />
-        <Box>Curio</Box>
-      <Spacer />
-      <Bo><
-        <InputGroup size="md">
-          nputGroup size="md">
-            
-            pr="4.5rem">
-            />
-            
-            
-              utRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
-            </Search
-        </</Button>
-        </</InputRightElement>
-        </InputGroup>
-      </Box>
-        pacg in /
-        <Box> 
-       Lo n>og out
-      <Button colorScheme="blue">Log in / Log out</Button>
+    // Search
+    <Spacer />
+      <Box>Curio</Box>
+    <Spacer />
+    <Box>
+    <InputGroup size="md" pr="4.5rem">         
+        <InputRightElement width="4.5rem">
+        <Button h="1.75rem" size="sm" onClick={handleClick}>
+          Search
+        </Button>
+        </InputRightElement>
+      </InputGroup>
+    </Box>
+    <Spacing />
+      <Box> 
+      // Logging out
+        <Button colorScheme="blue">Log in / Log out</Button>
       </Box>
     </Flex>
-  </div>
   )
   }
 }
