@@ -11,7 +11,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: '[name].[contenthash].js',
+    filename: '[name].bundle.js',
+    clean: true
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css'],
@@ -62,7 +63,7 @@ module.exports = {
   devServer: {
     open: true,
     hot: true,
-    publicPath: '/',
+    publicPath: '/build',
     proxy: {
       '/' : 'http://localhost:3000/'
     }
