@@ -61,6 +61,7 @@ module.exports = {
   },
   devServer: {
     open: true,
+    hot: true,
     publicPath: '/',
     proxy: {
       '/' : 'http://localhost:3000/'
