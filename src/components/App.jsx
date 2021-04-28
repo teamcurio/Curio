@@ -6,11 +6,13 @@ import NavBar from './NavBar';
 
 class App extends Component{
   render() {
+    return(
     // navbar component
     <NavBar/>
     // display component
       // description component
-    // footer   
+    // footer
+    )   
   }
 }
 

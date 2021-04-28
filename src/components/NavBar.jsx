@@ -9,7 +9,7 @@ import {
 
 class NavBar extends Component {
   render() {
-    // Title
+    // Title 
     // Favorites
     return(
     <Flex>
@@ -17,26 +17,23 @@ class NavBar extends Component {
         <Button colorScheme="blue">Favorites</Button>
       </Box>
     <Spacer />
-    // Genres
       <Box>
         <Button colorScheme="blue">Genres</Button>
       </Box>
-    // Search
     <Spacer />
       <Box>Curio</Box>
     <Spacer />
     <Box>
     <InputGroup size="md" pr="4.5rem">         
         <InputRightElement width="4.5rem">
-        <Button h="1.75rem" size="sm" onClick={handleClick}>
+        <Button h="1.75rem" size="sm" onClick={()=>console.log('hi')}>
           Search
         </Button>
         </InputRightElement>
       </InputGroup>
     </Box>
-    <Spacing />
+    <Spacer />
       <Box> 
-      // Logging out
         <Button colorScheme="blue">Log in / Log out</Button>
       </Box>
     </Flex>
