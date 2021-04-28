@@ -9,8 +9,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "../src/index.html"));
   });
   
-  app.listen(3000, () => console.log("Server Running On Port " + PORT));
+  app.listen(3000, () => console.log(path.join(__dirname, "../src/index.html")));
