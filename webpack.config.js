@@ -10,11 +10,12 @@ module.exports = {
     main: path.resolve(__dirname, './src/index.js'),
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, './build'),
+    filename: '[name].bundle.js',
+    clean: true
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', ".css"],
+    extensions: ['.js', '.jsx', '.json', '.css'],
   },
   module: {
     rules: [
@@ -61,9 +62,11 @@ module.exports = {
   },
   devServer: {
     open: true,
-    publicPath: '/build',
+    hot: true,
+    publicPath: '/build/',
+    port: 3434,
     proxy: {
-        "/" : "http://localhost:3000/"
+      '/' : 'http://localhost:3000/'
     }
   },
   plugins: [
