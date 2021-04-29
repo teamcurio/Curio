@@ -1,9 +1,8 @@
 import React from 'react';
+import {render } from 'react-dom';
+
+import { ChakraProvider } from "@chakra-ui/react";
+
 import App from './components/App'
 
-render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
-);
+render(<ChakraProvider><App /></ChakraProvider>, document.getElementById('root'));
