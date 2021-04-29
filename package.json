@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production nodemon server/server.js",
-    "build": "NODE_ENV=production webpack --watch",
-    "dev": "NODE_ENV=development webpack serve & nodemon server/server.js"
+    "start": "cross-env NODE_ENV=production nodemon server/server.js",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development webpack serve & nodemon server/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,17 +24,20 @@
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
     "bcrypt": "^5.0.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "framer-motion": "^4.1.10",
     "graphql": "^15.5.0",
+    "install": "^0.13.0",
+    "npm": "^7.11.1",
     "pg": "^8.6.0",
     "postgresql": "0.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.3.5",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

@@ -12,7 +12,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: '[name].bundle.js',
-    clean: true
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css'],
@@ -74,7 +73,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
-      filename: 'index.html', // output file
+      filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
