@@ -12,7 +12,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: '[name].bundle.js',
-    clean: true
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css'],
@@ -61,18 +60,20 @@ module.exports = {
     ],
   },
   devServer: {
-    open: true,
-    hot: true,
-    publicPath: '/build/',
-    port: 3434,
     proxy: {
-      '/' : 'http://localhost:3000/'
-    }
+      '*': 'http://localhost:3000'
+    },
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, './build'),
+    open: true,
+    compress: true,
+    hot: true,
+    port: 3434,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
-      filename: 'index.html', // output file
+      filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
