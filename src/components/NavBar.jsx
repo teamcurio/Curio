@@ -1,44 +1,63 @@
 import React, {Component} from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { 
   Button
   , Flex
   , Spacer
   , InputGroup,
   InputRightElement
-  , Box } from "@chakra-ui/react"
+  , Box, 
+  Input
+  ,Text
+,FormLabel} from "@chakra-ui/react"
 
-class NavBar extends Component {
-  render() {
-    // Title 
-    // Favorites
+const NavBar = () => {
+  const { handleSubmit, errors, register, formState } = useForm();
+  const [value, setValue] = useState('');
+
+  const onSubmit = (data, e) =>    {
+    e.preventDefault();
+    console.log('data',data);
+  }
+  const onError = (errors, e) => console.log('error', error);
+
     return(
     <Flex>
       <Box>
-        <Button colorScheme="blue">Favorites</Button>
+        <Button type="submit" colorScheme="blue">Favorites</Button>
       </Box>
     <Spacer />
       <Box>
-        <Button colorScheme="blue">Genres</Button>
+        <Button type="submit" colorScheme="blue">Genres</Button>
       </Box>
     <Spacer />
       <Box>Curio</Box>
     <Spacer />
     <Box>
-    <InputGroup size="md" pr="4.5rem">         
+    <form onSubmit={handleSubmit(onSubmit, onError)}>
+    <FormLabel htmlFor="search">Search Term</FormLabel>
+    <InputGroup size="md" pr="4.5rem">
+      <Input
+        pr="4.5rem"
+        placeholder="Search Term"
+        name='search' 
+        // onChange={(event) => setValue(event.currentTarget.value)}
+        />         
         <InputRightElement width="4.5rem">
-        <Button h="1.75rem" size="sm" onClick={()=>console.log('hi')}>
+        <Button type="submit" h="1.75rem" size="md" isLoading={formState.isSubmitting} >
           Search
         </Button>
         </InputRightElement>
       </InputGroup>
+      </form>
     </Box>
     <Spacer />
       <Box> 
-        <Button colorScheme="blue">Log in / Log out</Button>
+        <Button type="submit" colorScheme="blue">Log in / Log out</Button>
       </Box>
     </Flex>
   )
-  }
 }
 
 export default NavBar;

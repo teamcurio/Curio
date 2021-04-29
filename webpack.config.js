@@ -61,13 +61,15 @@ module.exports = {
     ],
   },
   devServer: {
-    open: true,
-    hot: true,
-    publicPath: '/build/',
-    port: 3434,
     proxy: {
-      '/' : 'http://localhost:3000/'
-    }
+      '*': 'http://localhost:3000'
+    },
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, './build'),
+    open: true,
+    compress: true,
+    hot: true,
+    port: 3434,
   },
   plugins: [
     new HtmlWebpackPlugin({
