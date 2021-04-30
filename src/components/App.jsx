@@ -3,15 +3,15 @@ import React, {Component} from 'react';
 
 
 import NavBar from './NavBar';
+import SignOnPage from './SignOnPage';
 
 class App extends Component{
   render() {
     return(
-    // navbar component
-    <NavBar/>
-    // display component
-      // description component
-    // footer
+    <div>
+      <NavBar/>
+      <SignOnPage/>
+    </div>
     )   
   }
 }
