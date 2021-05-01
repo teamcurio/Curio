@@ -85,6 +85,9 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     Images: {
       type: ImagesType,
+      args: {
+        searchTerm: { type: GraphQLString }
+      },
       resolve(parent, args) {
         return axios
           .get(
