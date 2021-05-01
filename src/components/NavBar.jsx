@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import {Link, Route} from "react-router-dom";
+import SignIn from "./SignInPage.jsx";
 
 import {
   Button,
@@ -74,11 +76,19 @@ const NavBar = () => {
       </Box>
       <Spacer />
       <Box>
+        <Link to="/signin">
         <Button type="submit" colorScheme="blue">
-          Log in / Log out
+          
+          
+          Sign in
+          
+
         </Button>
+        </Link>
       </Box>
-    </Flex>
+    <Route path='/signin'><div><SignIn/></div></Route>
+        </Flex>
+
   );
 };
 

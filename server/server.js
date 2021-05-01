@@ -2,10 +2,13 @@ const path = require('path');
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./models/graphqlSchema');
+const cors = require('cors')
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
 const app = express();
+
+app.use(cors());
 
 app.use(
   '/graphql',
