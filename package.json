@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production nodemon server/server.js",
+    "start": "cross-env NODE_ENV=production webpack serve --no-cache",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack serve & nodemon server/server.js"
   },
@@ -23,6 +23,7 @@
     "@chakra-ui/react": "^1.6.0",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
