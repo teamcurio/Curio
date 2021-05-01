@@ -9,26 +9,6 @@ const {
 } = require("graphql");
 const { ModuleFilenameHelpers } = require("webpack");
 
-//
-// objectID: int
-// accessionYear: string
-// isPublicDomain: boolean
-// primaryImage: string
-// constituents: array (each object contains constituentID: int, name: string)
-// department: string
-// objectName: string
-// title: string
-// culture: string
-// period: string
-// artistDisplayName: string
-// artistDisplayBio: string
-// artistNationality: string
-// objectDate: string
-// objectBeginDate: int
-// objectEndDate: int
-// objectUrl: string
-// tags: array (each object contains term: string)
-
 //Image Type
 const ImageType = new GraphQLObjectType({
   name: "Image",
@@ -85,24 +65,30 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     Images: {
       type: ImagesType,
+      args: {
+        searchTerm: { type: GraphQLString },
+      },
       resolve(parent, args) {
         return axios
           .get(
-            "https://collectionapi.metmuseum.org/public/collection/v1/objects"
+            `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${args.searchTerm}`
           )
           .then((response) => response.data);
       },
     },
     Image: {
-        type: ImageType,
-        args: {
-            objectID: {type: GraphQLInt}
-        },
-        resolve(parent, args) {
-            return axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${args.objectID}`)
-            .then((response) => response.data);
-        }
-    }
+      type: ImageType,
+      args: {
+        objectID: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://collectionapi.metmuseum.org/public/collection/v1/objects/${args.objectID}`
+          )
+          .then((response) => response.data);
+      },
+    },
   },
 });
 
