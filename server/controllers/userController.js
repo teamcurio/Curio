@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 
 const userController = {};
 
-userController.getUsers = (req, res) => {};
-
 userController.createUser = async (req, res, next) => {
   //create registration date
   let registration_date = new Date().toString().slice(0, 15);
@@ -41,7 +39,16 @@ userController.createUser = async (req, res, next) => {
       res.locals.user = { id, email };
       return next();
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log('Error caught in userController.createUser', err);
+       if (err.constraint === 'Users_email_key') {
+        return next({
+          message: { err: 'Email already exists' },
+        });
+      } else {
+        return next(err);
+      }
+    });
 
 
 
