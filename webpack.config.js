@@ -9,10 +9,11 @@ module.exports = {
   entry: {
     main: path.resolve(__dirname, './src/index.js'),
   },
-  output: {
-    path: path.resolve(__dirname, './build'),
-    filename: '[name].bundle.js',
-  },
+  // output: {
+  //   path: path.resolve(__dirname, './build'),
+  //   filename: '[name].bundle.js',
+  //   publicPath: '/'
+  // },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css'],
   },
@@ -64,11 +65,11 @@ module.exports = {
       '*': 'http://localhost:3000'
     },
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, './build'),
+    contentBase: path.resolve(__dirname, './dist'),
     open: true,
     compress: true,
     hot: true,
-    port: 3434,
+    port: 8080,
   },
   plugins: [
     new HtmlWebpackPlugin({
