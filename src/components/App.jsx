@@ -6,10 +6,9 @@ import NavBar from './NavBar';
 import Images from './Images';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3434/graphql'
+  uri: 'http://localhost:8080/graphql'
 });
 
-class App extends Component{
   render() {
     return(
     <ApolloProvider client={client}>

@@ -2,10 +2,13 @@ const path = require('path');
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./models/graphqlSchema');
+const cors = require('cors')
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
 const app = express();
+
+app.use(cors());
 
 app.use(
   '/graphql',
@@ -14,6 +17,8 @@ app.use(
     graphiql: true,
   }),
 );
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,8 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 //   });
 // }
 
-app.use(express.static(path.join(__dirname, '../src')));
 
+
+
+app.use(express.static(path.join(__dirname, '../src')));
+// app.get('/signin', (req, res) => {
+//   return res.status(200);
+// })
 
 //global error handler
 app.use((err, req, res, next) => {
