@@ -65,10 +65,13 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     Images: {
       type: ImagesType,
+      args: {
+        searchTerm: { type: GraphQLString },
+      },
       resolve(parent, args) {
         return axios
           .get(
-            "https://collectionapi.metmuseum.org/public/collection/v1/objects"
+            `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${args.searchTerm}`
           )
           .then((response) => response.data);
       },
