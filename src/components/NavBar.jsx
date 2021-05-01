@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import {Link, Route} from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import SignIn from "./SignInPage.jsx";
 
 import {
@@ -21,24 +21,24 @@ const NavBar = () => {
   const handleSearchValue = (e) => setSearchValue(e.target.searchValue);
 
   const handleSubmitSearch = () => {
-  let data = new URLSearchParams();
-  data.append("searchValue", searchValue);
- 
-  fetch("/search", {
-    method: 'post',
-    body: data
-  })
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (jsonData) {
-    console.log(jsonData);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  // (C) PREVENT HTML FORM SUBMIT
-  return false;
+    let data = new URLSearchParams();
+    data.append("searchValue", searchValue);
+
+    fetch("/search", {
+      method: 'post',
+      body: data
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (jsonData) {
+        console.log(jsonData);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // (C) PREVENT HTML FORM SUBMIT
+    return false;
   };
 
   return (
@@ -67,7 +67,7 @@ const NavBar = () => {
               onChange={handleSearchValue}
             />
             <InputRightElement width="4.5rem">
-              <Button type="submit" h="1.75rem" size="md">
+              <Button type="submit" colorScheme="blue" >
                 Search
               </Button>
             </InputRightElement>
@@ -77,17 +77,12 @@ const NavBar = () => {
       <Spacer />
       <Box>
         <Link to="/signin">
-        <Button type="submit" colorScheme="blue">
-          
-          
-          Sign in
-          
-
+          <Button type="submit" colorScheme="blue">
+            Sign in
         </Button>
         </Link>
       </Box>
-    <Route path='/signin'><div><SignIn/></div></Route>
-        </Flex>
+    </Flex>
 
   );
 };

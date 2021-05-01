@@ -35,7 +35,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(express.static(path.join(__dirname, '../src')));
-
+// app.get('/signin', (req, res) => {
+//   return res.status(200);
+// })
 
 //global error handler
 app.use((err, req, res, next) => {
