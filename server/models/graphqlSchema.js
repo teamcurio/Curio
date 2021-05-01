@@ -6,32 +6,12 @@ const {
   GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
-} = require("graphql");
-const { ModuleFilenameHelpers } = require("webpack");
-
-//
-// objectID: int
-// accessionYear: string
-// isPublicDomain: boolean
-// primaryImage: string
-// constituents: array (each object contains constituentID: int, name: string)
-// department: string
-// objectName: string
-// title: string
-// culture: string
-// period: string
-// artistDisplayName: string
-// artistDisplayBio: string
-// artistNationality: string
-// objectDate: string
-// objectBeginDate: int
-// objectEndDate: int
-// objectUrl: string
-// tags: array (each object contains term: string)
+} = require('graphql');
+// const { ModuleFilenameHelpers } = require("webpack");
 
 //Image Type
 const ImageType = new GraphQLObjectType({
-  name: "Image",
+  name: 'Image',
   fields: () => ({
     objectID: { type: GraphQLInt },
     accessionYear: { type: GraphQLString },
@@ -56,7 +36,7 @@ const ImageType = new GraphQLObjectType({
 
 //Constituents Type
 const ConstituentsType = new GraphQLObjectType({
-  name: "Constituents",
+  name: 'Constituents',
   fields: () => ({
     constituentID: { type: GraphQLInt },
     name: { type: GraphQLString },
@@ -65,14 +45,14 @@ const ConstituentsType = new GraphQLObjectType({
 
 //Tag type
 const TagType = new GraphQLObjectType({
-  name: "Tag",
+  name: 'Tag',
   fields: () => ({
     term: { type: GraphQLString },
   }),
 });
 
 const ImagesType = new GraphQLObjectType({
-  name: "Images",
+  name: 'Images',
   fields: () => ({
     total: { type: GraphQLInt },
     objectIDs: { type: new GraphQLList(GraphQLInt) },
@@ -81,31 +61,34 @@ const ImagesType = new GraphQLObjectType({
 
 //Root Query
 const RootQuery = new GraphQLObjectType({
-  name: "RootQueryType",
+  name: 'RootQueryType',
   fields: {
     Images: {
       type: ImagesType,
       args: {
-        searchTerm: { type: GraphQLString }
+        searchTerm: { type: GraphQLString },
       },
       resolve(parent, args) {
         return axios
           .get(
-            "https://collectionapi.metmuseum.org/public/collection/v1/objects"
+            `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${args.searchTerm}`
           )
           .then((response) => response.data);
       },
     },
     Image: {
-        type: ImageType,
-        args: {
-            objectID: {type: GraphQLInt}
-        },
-        resolve(parent, args) {
-            return axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${args.objectID}`)
-            .then((response) => response.data);
-        }
-    }
+      type: ImageType,
+      args: {
+        objectID: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://collectionapi.metmuseum.org/public/collection/v1/objects/${args.objectID}`
+          )
+          .then((response) => response.data);
+      },
+    },
   },
 });
 
