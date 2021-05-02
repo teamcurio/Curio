@@ -18,7 +18,7 @@ import {
 // import Footer from '../components/Footer';
 // import { useAuth } from '../useAuth';
 
-const SignIn = () => {
+const LogIn = () => {
   // const auth = useAuth();
 
   // this sets the current state using the useState hook;
@@ -59,7 +59,7 @@ const SignIn = () => {
     let description;
     let duration;
 
-    fetch('/api/member/login', {
+    fetch('/member/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(currentUser),
@@ -99,7 +99,7 @@ const SignIn = () => {
           background="cyan.300"
         >
           <Text textAlign="center" letterSpacing="2px" mb={2}>
-            Exploration
+            Curio
           </Text>
         </Box>
         <Container
@@ -153,11 +153,11 @@ const SignIn = () => {
           <Container>
             <Flex justifyContent="space-between" padding={5}>
               <Text fontSize="12px">Do not have an account?</Text>
-              {/* <NavLink to="/signup">
+              <NavLink to="/signup">
                 <Text fontSize="12px" textDecoration="underline">
                   Sign up
                 </Text>
-              </NavLink> */}
+              </NavLink>
             </Flex>
             {/* <NavLink to="/resetPassword"><Text id="forgotPassword" ml="30px" pt="5px" fontSize="10px">Forgot username and password?</Text></NavLink> */}
           </Container>
@@ -168,4 +168,4 @@ const SignIn = () => {
     </>
   );
 };
-export default SignIn;
+export default LogIn;
