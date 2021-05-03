@@ -35,8 +35,7 @@ userController.createUser = async (req, res, next) => {
                            VALUES ($1, $2, $3) RETURNING *`;
   const values = [email, hashedPassword, registration_date];
 
-
-  db.query(createUserQuery,values)
+  db.query(createUserQuery, values)
     .then((response) => {
       console.log("response", response);
       const { id, email } = response.rows[0];
@@ -55,8 +54,7 @@ userController.createUser = async (req, res, next) => {
     });
 };
 
-
-userController.checkEmail= async (req, res, next) => {
+userController.checkEmail = async (req, res, next) => {
   const { email } = req.body;
   const checkEmail = `
         SELECT *
@@ -66,11 +64,11 @@ userController.checkEmail= async (req, res, next) => {
   const value = [email];
 
   db.query(checkEmail, value)
-    .then(response => {
+    .then((response) => {
       res.locals.emailExists = response.rows[0] ? true : false;
       return next();
     })
-    .catch(err => {
+    .catch((err) => {
       return next({
         log: `userController: Unable to verify email with checkEmail`,
         message: {
@@ -80,7 +78,4 @@ userController.checkEmail= async (req, res, next) => {
     });
 };
 
-
-
 module.exports = userController;
-
