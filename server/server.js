@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 require("dotenv").config();
 //  Required routes:
 const authRouter = require("./routes/authRouter");
+// const favoritesRouter = require("./routes/favoritesRouter")
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, "../src")));
 
 // Define route handlers:
 app.use("/auth", authRouter);
+// app.use('/favorites', favoritesRouter);
 
 //global error handler
 app.use((err, req, res, next) => {
