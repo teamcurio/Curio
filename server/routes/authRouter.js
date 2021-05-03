@@ -8,4 +8,8 @@ router.post("/signup", userController.createUser, (req, res) => {
   });
 });
 
+router.post('/checkemail', userController.checkEmail, (req, res) => {
+  return res.status(200).json(res.locals.emailExists);
+});
+
 module.exports = router;

@@ -55,5 +55,32 @@ userController.createUser = async (req, res, next) => {
     });
 };
 
+
+userController.checkEmail= async (req, res, next) => {
+  const { email } = req.body;
+  const checkEmail = `
+        SELECT *
+        FROM "public"."Users"
+        WHERE email=$1
+      `;
+  const value = [email];
+
+  db.query(checkEmail, value)
+    .then(response => {
+      res.locals.emailExists = response.rows[0] ? true : false;
+      return next();
+    })
+    .catch(err => {
+      return next({
+        log: `userController: Unable to verify email with checkEmail`,
+        message: {
+          err: `userController.checkEmail: ERROR: ${err}`,
+        },
+      });
+    });
+};
+
+
+
 module.exports = userController;
 
