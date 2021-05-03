@@ -31,14 +31,15 @@ userController.createUser = async (req, res, next) => {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   //create SQL query to insert user info to database
-  const createUserQuery = `INSERT INTO "public"."Users" (id, email, password, registration_date, ) 
-                           VALUES ($1, $2, $3, $4) RETURNING *`;
+  const createUserQuery = `INSERT INTO "public"."Users" (email, password, registration_date) 
+                           VALUES ($1, $2, $3) RETURNING *`;
+  const values = [email, hashedPassword, registration_date];
 
-  const values = [uuid_generate_v4(), email, hashedPassword, registration_date];
 
-  db.query(createUserQuery, values)
-    .then((res) => {
-      const { id, email } = res.rows[0];
+  db.query(createUserQuery,values)
+    .then((response) => {
+      console.log("response", response);
+      const { id, email } = response.rows[0];
       res.locals.user = { id, email };
       return next();
     })
@@ -53,3 +54,6 @@ userController.createUser = async (req, res, next) => {
       }
     });
 };
+
+module.exports = userController;
+
