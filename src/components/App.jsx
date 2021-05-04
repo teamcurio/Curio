@@ -22,11 +22,11 @@ class App extends Component {
       <ApolloProvider client={client}>
         <NavBar />
         <div className='router'>
-          <CurioHomePage />
+          {/* <CurioHomePage /> */}
           <Switch>
             <Route path='/' exact component={LandingPage} />
             <Route exact path="/login" component={LogIn} />
-            {/* <Route exact path='/' component={ImageContainer}/>  */}
+            <Route exact path='/images' component={ImageContainer} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path='/signup' component={SignUp} />
           </Switch>
