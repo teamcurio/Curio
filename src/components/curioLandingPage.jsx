@@ -67,7 +67,9 @@ const LandingPage = () => {
                   {/* <Button type="submit" bg='black' color='white' >
                     Search
               </Button> */}
-                  <IconButton type='submit' aria-label="search" icon={<SearchIcon />} />
+                  <Link to="/images">
+                    <IconButton type='submit' aria-label="search" icon={<SearchIcon />} />
+                  </Link>
                 </InputRightElement>
               </InputGroup>
             </form>
