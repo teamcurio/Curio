@@ -42,7 +42,7 @@ const ImageItem = ({ imageID }) => {
           console.log(imageID);
           return (
             <>
-              <h1>{data.Image.accessionYear}</h1>
+              <h1>{data.Image.primaryImage}</h1>
             </>
           );
         }}
