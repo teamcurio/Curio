@@ -2,10 +2,14 @@
 import React, {Component} from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import NavBar from './NavBar';
+import LandingPage from './curioLandingPage';
+import CurioHomePage from './CurioHomePage';
 import Images from './Images';
-import SignIn from './SignInPage';
+import LogIn from './LogInPage';
+import SignUp from './SignUpPage';
+// import PrivateRoute from './privateRoute';
 import { Switch, Route } from 'react-router-dom';
+
 
 const client = new ApolloClient({
   uri: 'http://localhost:8080/graphql'
@@ -14,11 +18,12 @@ class App extends Component {
   render() {
     return(
     <ApolloProvider client={client}>
-      {/* // navbar component */}
-        <NavBar />
         <div className='router'>
           <Switch>
-            <Route exact path="/signin" component={SignIn} />
+            <Route path = '/' exact component={LandingPage}/>
+            <Route exact path="/login" component={LogIn} />
+            <Route exact path='/signup' component={SignUp} />
+            {/* <PrivateRoute path='/home' component={CurioHomePage}/> */}
           </Switch>
         </div>
       <Images />
