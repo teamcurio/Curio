@@ -42,8 +42,8 @@ const NavBar = () => {
   };
 
   return (
-    <Flex>
-      <Box>
+    <Flex justifyContent='center'>
+      {/* <Box>
         <Button type="submit" colorScheme="blue">
           Favorites
         </Button>
@@ -55,9 +55,8 @@ const NavBar = () => {
         </Button>
       </Box>
       <Spacer />
-      <Box>Curio</Box>
-      <Spacer />
-      <Box>
+      <Spacer /> */}
+      {/* <Box>
         <form onSubmit={handleSubmitSearch}>
           <InputGroup size="md" pr="4.5rem">
             <Input
@@ -73,12 +72,15 @@ const NavBar = () => {
             </InputRightElement>
           </InputGroup>
         </form>
-      </Box>
+      </Box> */}
       <Spacer />
-      <Box>
-        <Link to="/signout">
-          <Button type="submit" colorScheme="blue">
-            Sign in
+      <Box position='fixed' width='100%' color='white' h='40px' bg='black' border='solid' borderBottomRadius='15px'>
+        {/* <NavBar /> */}
+        {/* </Box> */}
+        {/* <Box> */}
+        <Link to="/login">
+          <Button float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }} >
+            Log In
         </Button>
         </Link>
       </Box>
