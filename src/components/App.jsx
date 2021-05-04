@@ -10,6 +10,7 @@ import SignUp from './SignUpPage';
 import NavBar from './NavBar';
 // import PrivateRoute from './privateRoute';
 import { Switch, Route } from 'react-router-dom';
+import ImageContainer from './ImageContainer';
 
 
 const client = new ApolloClient({
@@ -21,11 +22,13 @@ class App extends Component {
       <ApolloProvider client={client}>
         <NavBar />
         <div className='router'>
+          <CurioHomePage />
           <Switch>
             <Route path='/' exact component={LandingPage} />
             <Route exact path="/login" component={LogIn} />
+            {/* <Route exact path='/' component={ImageContainer}/>  */}
+            <Route exact path="/login" component={LogIn} />
             <Route exact path='/signup' component={SignUp} />
-            {/* <PrivateRoute path='/home' component={CurioHomePage}/> */}
           </Switch>
         </div>
         {/* <Images /> */}
