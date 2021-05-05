@@ -9,14 +9,17 @@ const fadeIn = keyframes`
   100% { opacity:1; }
   `;
 
-const arr = [
-  { show: "block", url: "https://source.unsplash.com/WLUHO9A_xik/1440x960" },
-  { show: "none", url: "https://source.unsplash.com/DNE9iZ1Kqzk/1440x960" },
-  { show: "none", url: "https://source.unsplash.com/6ccJQ5qPFvY/1440x960" },
-  { show: "none", url: "https://source.unsplash.com/qTLyiHW1nIc/1440x960" },
-  { show: "none", url: "https://source.unsplash.com/fxX__3GRtsg/1440x960" }
-];
-const ImageContainer = () => {
+// const arr = [
+//   { show: "block", url: "https://source.unsplash.com/WLUHO9A_xik/1440x960" },
+//   { show: "none", url: "https://source.unsplash.com/DNE9iZ1Kqzk/1440x960" },
+//   { show: "none", url: "https://source.unsplash.com/6ccJQ5qPFvY/1440x960" },
+//   { show: "none", url: "https://source.unsplash.com/qTLyiHW1nIc/1440x960" },
+//   { show: "none", url: "https://source.unsplash.com/fxX__3GRtsg/1440x960" }
+// ];
+const ImageContainer = (props) => {
+  console.log(props);
+
+const arr = props.imgArr
 
   const [value, setValue] = React.useState(1);
   const [delay, setDelay] = React.useState(5000);
