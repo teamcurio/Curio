@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 const {
   GraphQLObjectType,
   GraphQLInt,
@@ -6,12 +6,12 @@ const {
   GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
-} = require("graphql");
-const { ModuleFilenameHelpers } = require("webpack");
+} = require('graphql');
+
 
 //Image Type
 const ImageType = new GraphQLObjectType({
-  name: "Image",
+  name: 'Image',
   fields: () => ({
     objectID: { type: GraphQLInt },
     accessionYear: { type: GraphQLString },
@@ -36,7 +36,7 @@ const ImageType = new GraphQLObjectType({
 
 //Constituents Type
 const ConstituentsType = new GraphQLObjectType({
-  name: "Constituents",
+  name: 'Constituents',
   fields: () => ({
     constituentID: { type: GraphQLInt },
     name: { type: GraphQLString },
@@ -45,23 +45,24 @@ const ConstituentsType = new GraphQLObjectType({
 
 //Tag type
 const TagType = new GraphQLObjectType({
-  name: "Tag",
+  name: 'Tag',
   fields: () => ({
     term: { type: GraphQLString },
   }),
 });
 
 const ImagesType = new GraphQLObjectType({
-  name: "Images",
+  name: 'Images',
   fields: () => ({
     total: { type: GraphQLInt },
-    objectIDs: { type: new GraphQLList(GraphQLInt) },
+    objectIDs: { type: new GraphQLList(GraphQLInt) }
+    // Individual: { type: new GraphQLList(ImageType) }
   }),
 });
 
 //Root Query
 const RootQuery = new GraphQLObjectType({
-  name: "RootQueryType",
+  name: 'RootQueryType',
   fields: {
     Images: {
       type: ImagesType,
@@ -73,7 +74,24 @@ const RootQuery = new GraphQLObjectType({
           .get(
             `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${args.searchTerm}`
           )
-          .then((response) => response.data);
+          .then((response) => response.data)
+          .then((response => {
+            // console.log(response.objectIDs);
+            response.objectIDs.map(objectID => {
+              return axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`)
+                .then(objResponse => objResponse.data)
+                .then(objResponse => {
+                  console.log(objResponse);
+                  // const image = new ImageType
+                  // images.push(objResponse);
+                  // const obj = new ImageType;
+                  // images.push(obj);
+                  return objResponse;
+                });
+            });
+            // console.log(images);
+            return response;
+          }));
       },
     },
     Image: {
