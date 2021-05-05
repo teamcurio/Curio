@@ -7,11 +7,8 @@ const {
   GraphQLList,
   GraphQLSchema,
 } = require('graphql');
-<<<<<<< HEAD
 
-=======
 // const { ModuleFilenameHelpers } = require("webpack");
->>>>>>> main
 
 //Image Type
 const ImageType = new GraphQLObjectType({
