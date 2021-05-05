@@ -51,6 +51,7 @@ const TagType = new GraphQLObjectType({
   }),
 });
 
+//Images type
 const ImagesType = new GraphQLObjectType({
   name: 'Images',
   fields: {
@@ -65,7 +66,7 @@ const ImagesType = new GraphQLObjectType({
               `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
             )
             .then((response) => {
-              console.log("Data", response.data)
+              // console.log("Data", response.data)
               return response.data}); 
         })
       }
