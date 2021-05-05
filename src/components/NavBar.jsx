@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { Link, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, Route, useHistory } from "react-router-dom";
 
 
 import {
@@ -17,9 +17,17 @@ import {
   GridItem,
 } from "@chakra-ui/react";
 
+
+
 const NavBar = () => {
+
+  const history = useHistory();
+
   const [searchValue, setSearchValue] = useState("");
   const handleSearchValue = (e) => setSearchValue(e.target.searchValue);
+  const [isLoggedIn, setLogin] = useState(Boolean(localStorage.getItem('curioUser')))
+
+  // useEffect(, isLoggedIn)
 
   const handleSubmitSearch = () => {
     let data = new URLSearchParams();
@@ -42,14 +50,21 @@ const NavBar = () => {
     return false;
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('curioUser');
+    setLogin()
+    history.push('/');
+  }
+
+console.log(localStorage.getItem('curioUser'))
   return (
     <Flex justifyContent='center'>
-      {/* <Box>
-        <Button type="submit" colorScheme="blue">
-          Favorites
-        </Button>
-      </Box>
-      <Spacer />
+    
+     {/* !localStorage.getItem('curioUser') &&  */}
+
+
+    
+      {/*<Spacer />
       <Box>
         <Button type="submit" colorScheme="blue">
           Genres
@@ -76,14 +91,26 @@ const NavBar = () => {
       </Box> */}
       <Spacer />
       <Box position='fixed' width='100%' color='white' h='40px' bg='black' border='solid' borderBottomRadius='15px'>
+      {localStorage.getItem('curioUser') && (<Link to='/favorites'>
+      <Button float='left' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }}>
+        Favorites
+      </Button>
+      </Link>)}
         {/* <NavBar /> */}
         {/* </Box> */}
         {/* <Box> */}
+        {!localStorage.getItem('curioUser') ? (
         <Link to="/login">
           <Button float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }} >
             Log In
         </Button>
-        </Link>
+        </Link>) : 
+        (  
+        <Link to="/">
+        <Button onClick={()=>handleLogout()} float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }} >
+          Sign Out
+      </Button>
+      </Link>)}
         {/* <Box>
       <Stack spacing={4} direction="row" align="center" padding="0">
     <Link to="/signup">

@@ -73,11 +73,11 @@ const LogIn = () => {
           throw data;
         });
       })
-      // .then((data) => {
-      //   auth.signInFunc(data.user.id, data.user.username, () =>
-      //     history.replace('/time/home')
-      //   );
-      // })
+      .then((data) => {
+        localStorage.setItem(`curioUser`, data.user_id);
+          history.push('/favorites')
+        ;
+      })
       .catch((error) => {
         title = 'error';
         description = `${error.err}`;
