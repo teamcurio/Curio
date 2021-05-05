@@ -77,14 +77,20 @@ const RootQuery = new GraphQLObjectType({
             `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${args.searchTerm}`
           )
           .then((response) => response.data);
-        // .then(response => {
-        //   // console.log(response.objectIDs);
-        //   response.objectIDs.map(objectID => {
-        //     // console.log('hi');
-        //     return axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`)
-        //       .then(objResponse => objResponse.data);
-        //   });
+        //         .then(response => {
+        //           // console.log(response.objectIDs);
+        //           response.data.objectIDs.map(objectID => {
+        //             console.log('hi');
+        //             return axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`)
+        //               .then(objResponse => objResponse.data);
+        //           })
+        //         })
+        //         .then(response => response.data);
+        //     }
+        //   }
+        // }
         // });
+
 
         // .then(objResponse => {
         //   // console.log(objResponse);
