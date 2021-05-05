@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Button, useColorMode } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
-
 
 
 const fadeIn = keyframes`
@@ -20,6 +19,8 @@ const ImageContainer = () => {
 
   const [value, setValue] = React.useState(1);
   const [delay, setDelay] = React.useState(5000);
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const handleChange = e => {
     if (e.target.id === "+") {
@@ -98,6 +99,9 @@ const ImageContainer = () => {
           {`>>>`}{" "}
         </button>
       </div>
+      <Button onClick={toggleColorMode}>
+        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+      </Button>
     </>
   );
 }
