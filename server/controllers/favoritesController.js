@@ -3,6 +3,7 @@ const db = require("../models/curioModel");
 
 const favoritesController = {};
 
+//GET FAVORITES CONTROLLER:
 favoritesController.getFavorites = async (req, res, next) => {
   const user_id = res.locals.user_id;
   console.log("user id", user_id);
@@ -39,6 +40,7 @@ favoritesController.getFavorites = async (req, res, next) => {
   }
 };
 
+//ADD FAVORITES CONTROLLER:
 favoritesController.addFavorite = async (req, res, next) => {
   const { image_id, user_id } = req.body;
   // const user_id = res.locals.user_id;
@@ -70,6 +72,7 @@ favoritesController.addFavorite = async (req, res, next) => {
   }
 };
 
+//DELETE FAVORITES CONTROLLER:
 favoritesController.deleteFavorite = async (req, res, next) => {
   const { image_id } = req.body;
   const user_id = res.locals.user_id;

@@ -2,19 +2,37 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-// const authController = require("../controllers/authController");
+const authController = require("../controllers/authController");
 const favoritesController = require("../controllers/favoritesController");
 
-router.get("/getFavorites", favoritesController.getFavorites, (req, res) => {
-  res.status(200).json(res.locals.favorites);
-});
+//Get favorites:
+router.get(
+  "/getFavorites",
+  authController.verifyJWT,
+  favoritesController.getFavorites,
+  (req, res) => {
+    res.status(200).json(res.locals.favorites);
+  }
+);
 
-router.post('/addFavorite', favoritesController.addFavorite, (req, res) => {
-  res.status(200).send('Favorite Saved');
-});
+//Add favorites:
+router.post(
+  "/addFavorite",
+  authController.verifyJWT,
+  favoritesController.addFavorite,
+  (req, res) => {
+    res.status(200).send("Favorite Saved");
+  }
+);
 
-router.delete('/deleteFavorite', favoritesController.deleteFavorite, (req, res) => {
-  res.status(200).send('Favorite Deleted')
-});
+//Delete favorites:
+router.delete(
+  "/deleteFavorite",
+  authController.verifyJWT,
+  favoritesController.deleteFavorite,
+  (req, res) => {
+    res.status(200).send("Favorite Deleted");
+  }
+);
 
 module.exports = router;

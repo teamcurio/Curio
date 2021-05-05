@@ -33,9 +33,18 @@ app.use(express.urlencoded({ extended: true }));
 //   });
 // }
 
+//handle requests for static files
 app.use(express.static(path.join(__dirname, "../src")));
 
 // Define route handlers:
+app.use("*", (req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Authorization, Origin, Content-Type, Accept"
+  );
+  return next();
+});
+
 app.use("/auth", authRouter);
 app.use("/favorites", favoritesRouter);
 
