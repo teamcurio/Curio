@@ -6,12 +6,12 @@ const {
   GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
-} = require("graphql");
-const { ModuleFilenameHelpers } = require("webpack");
+} = require('graphql');
+// const { ModuleFilenameHelpers } = require("webpack");
 
 //Image Type
 const ImageType = new GraphQLObjectType({
-  name: "Image",
+  name: 'Image',
   fields: () => ({
     objectID: { type: GraphQLInt },
     accessionYear: { type: GraphQLString },
@@ -36,7 +36,7 @@ const ImageType = new GraphQLObjectType({
 
 //Constituents Type
 const ConstituentsType = new GraphQLObjectType({
-  name: "Constituents",
+  name: 'Constituents',
   fields: () => ({
     constituentID: { type: GraphQLInt },
     name: { type: GraphQLString },
@@ -45,14 +45,14 @@ const ConstituentsType = new GraphQLObjectType({
 
 //Tag type
 const TagType = new GraphQLObjectType({
-  name: "Tag",
+  name: 'Tag',
   fields: () => ({
     term: { type: GraphQLString },
   }),
 });
 
 const ImagesType = new GraphQLObjectType({
-  name: "Images",
+  name: 'Images',
   fields: () => ({
     total: { type: GraphQLInt },
     objectIDs: { type: new GraphQLList(GraphQLInt) },
@@ -61,7 +61,7 @@ const ImagesType = new GraphQLObjectType({
 
 //Root Query
 const RootQuery = new GraphQLObjectType({
-  name: "RootQueryType",
+  name: 'RootQueryType',
   fields: {
     Images: {
       type: ImagesType,
