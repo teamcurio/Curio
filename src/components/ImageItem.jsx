@@ -27,17 +27,13 @@ const ImageItem = (props) => {
     value === 0 ? setValue(images.length - 1) : setValue(value - 1);
   };
 
-  //   // Set up the interval.
-//   useEffect(() => {
-//     function tick() {
-//       savedCallback.current();
-//     }
-//     if (delay !== null) {
-//       let id = setInterval(tick, delay);
-//       return () => clearInterval(id);
-//     }
-//   }, [delay]);
-// }
+    // Set up the interval.
+  useEffect(() => {
+    setInterval(() => {
+      value === images.length - 1 ? setValue(0) : setValue(value + 1);
+    }, 3000);
+  }, [value]);
+
 
 
   return (
