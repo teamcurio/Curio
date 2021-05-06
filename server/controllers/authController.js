@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const authController = {};
 
+//VERIFY USER INFORMATION (EMAIL/PASSWORD) CONTROLLER:
 authController.verifyUser = (req, res, next) => {
   const { email, password } = req.body;
   const verifyUserString = `
@@ -44,6 +45,7 @@ authController.verifyUser = (req, res, next) => {
     });
 };
 
+//GENERATE JWT TOKEN CONTROLLER:
 authController.generateJWT = (req, res, next) => {
   let token = jwt.sign({ id: res.locals.user.id }, process.env.JWT_SECRET, {
     expiresIn: 600,
@@ -52,6 +54,7 @@ authController.generateJWT = (req, res, next) => {
   return next();
 };
 
+//VERIFY JWT TOKEN CONTROLLER:
 authController.verifyJWT = (req, res, next) => {
   //TODO:Check token
   console.log("Req.header-->", req.headers);

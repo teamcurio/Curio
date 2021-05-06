@@ -54,6 +54,7 @@ userController.createUser = async (req, res, next) => {
     });
 };
 
+//CHECK IN EMAIL ALREADY IN DATABASE:
 userController.checkEmail = async (req, res, next) => {
   const { email } = req.body;
   const checkEmail = `
