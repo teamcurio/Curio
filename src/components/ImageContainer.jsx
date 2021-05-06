@@ -12,10 +12,11 @@ import {
   Heading
 } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
-import { StarIcon } from "@chakra-ui/icons";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import ImageItem from "./ImageItem"
+import NavBar from './NavBar';
+
 
 const fadeIn = keyframes`
   0% { opacity:0; }
@@ -99,6 +100,7 @@ const ImageContainer = (props) => {
 
   return (
     <>
+      <NavBar />
       <div>
         <h1>Hi</h1>
         <Query query={IMAGES_QUERY} variables={{ searchTerm }}>

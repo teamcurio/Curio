@@ -15,6 +15,7 @@ import {
   useToast,
   Spacer
 } from '@chakra-ui/react';
+import NavBar from './NavBar';
 
 // import Footer from '../components/Footer';
 // import { useAuth } from '../useAuth';
@@ -24,7 +25,7 @@ const LogIn = () => {
 
   // this sets the current state using the useState hook;
   const [currentUser, setCurrentUserField] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   // this sets the toast parts according to errors/actions
@@ -59,23 +60,29 @@ const LogIn = () => {
     let title;
     let description;
     let duration;
-
-    fetch('/member/login', {
+    console.log('currentUser',currentUser);
+    fetch('/auth/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(currentUser),
     })
       .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        return res.json().then((data) => {
-          throw data;
-        });
+        // if (res.status === 200) {
+        //   console.log('reached here')
+        //   console.log('res', res);
+        //   return res.json();
+        // }
+        // return res.json().then((data) => {
+        //   throw data;
+        // });
+
+        return res.json();
       })
       .then((data) => {
-        localStorage.setItem(`curioUser`, data.user_id);
-          history.push('/favorites')
+        console.log('data', data);
+        localStorage.setItem('curioToken', data.token);
+        localStorage.setItem('curioUser', data.user);
+        history.push('/')
         ;
       })
       .catch((error) => {
@@ -90,6 +97,7 @@ const LogIn = () => {
   return (
     <>
       <LightMode>
+        <NavBar />
         <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
           <Box>
             {/* <Box
@@ -119,9 +127,9 @@ const LogIn = () => {
                   <FormControl isRequired>
                     <FormLabel>Email:</FormLabel>
                     <Input
-                      id="username"
+                      id="email"
                       onChange={handleInputChange}
-                      name="username"
+                      name="email"
                       borderColor='black'
                       color='black'
                     />
