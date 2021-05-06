@@ -73,16 +73,16 @@ const LogIn = () => {
           throw data;
         });
       })
-      // .then((data) => {
-      //   auth.signInFunc(data.user.id, data.user.username, () =>
-      //     history.replace('/time/home')
-      //   );
-      // })
+      .then((data) => {
+        localStorage.setItem(`curioUser`, data.user_id);
+          history.push('/favorites')
+        ;
+      })
       .catch((error) => {
         title = 'error';
         description = `${error.err}`;
         duration = 9000;
-        n;
+        // n;
         setToastMessage({ title, description, duration });
       });
   };
@@ -117,7 +117,7 @@ const LogIn = () => {
               <Container marginBottom="1px solid silver" justifyContent="column">
                 <form onSubmit={handleUserSubmit}>
                   <FormControl isRequired>
-                    <FormLabel>Username:</FormLabel>
+                    <FormLabel>Email:</FormLabel>
                     <Input
                       id="username"
                       onChange={handleInputChange}
@@ -126,7 +126,7 @@ const LogIn = () => {
                       color='black'
                     />
                     <FormHelperText fontSize="12px" id="email-helper-text">
-                      Your username
+                      Your email
                 </FormHelperText>
                   </FormControl>
                   <FormControl isRequired mt="10px">
