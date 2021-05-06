@@ -10,14 +10,21 @@ import {
   IconButton,
   useColorMode,
 } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
+import { keyframes } from "@emotion/react";
+import { StarIcon, ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
 
-const ImageItem = ({images}) => {
+//Styling:
+const fadeIn = keyframes`
+  0% { opacity:0; }
+  100% { opacity:1; }
+  `;
+
+const ImageItem = ({ images }) => {
   const [value, setValue] = useState(0);
   const { colorMode, toggleColorMode } = useColorMode();
 
-  //Filter out only images that can be shown publicly 
-   images = images.filter((image) => image.isPublicDomain === true);
+  //Filter out only images that can be shown publicly
+  images = images.filter((image) => image.isPublicDomain === true);
 
   //Handle function to move images carousel forwards and backwards
   const incrementItem = () => {
@@ -29,13 +36,13 @@ const ImageItem = ({images}) => {
 
   // SetInterval to move through array of images at a set timer
   useEffect(() => {
-    setInterval(() => {
-      value === images.length - 1 ? setValue(0) : setValue(value + 1);
+    const interval = setInterval(() => {
+      value === images.length - 1
+        ? setValue(() => 0)
+        : setValue(() => value + 1);
     }, 10000);
-    return () => clearInterval()
+    return () => clearInterval(interval);
   }, [value]);
-
-
 
   return (
     <>
@@ -45,13 +52,11 @@ const ImageItem = ({images}) => {
         </Text>
       </div>
       <Stack direction={["column, row"]} spacing="24px">
-       <Spacer/>
-        <button
-          style={{ outline: "none" }}
-          onClick={decrementItem}
-          id="-"
-        >{`<<<`}</button>
-           <Spacer/>
+        <Spacer />
+        {/* <button style={{ outline: "none" }} onClick={decrementItem} id="-"> */}
+          <IconButton aria-label="favorite"  icon={<ArrowBackIcon />} onClick={decrementItem} id="-"/>
+        {/* </button> */}
+        <Spacer />
 
         <Box
           backgroundColor="#222"
@@ -59,6 +64,7 @@ const ImageItem = ({images}) => {
           backgroundPosition="center"
           backgroundSize="cover"
           backgroundRepeat="no-repeat"
+          animation={`${fadeIn} ease 3s`}
           width="80vw"
           height="60vh"
           mt="10px"
@@ -84,11 +90,11 @@ const ImageItem = ({images}) => {
           </div>
         </Box>
 
-           <Spacer/>
+        <Spacer />
         <button style={{ outline: "none" }} onClick={incrementItem} id="+">
-          {`>>>`}{" "}
+          <IconButton aria-label="favorite" icon={<ArrowForwardIcon />} />
         </button>
-           <Spacer/>
+        <Spacer />
       </Stack>
       <Box
         backgroundColor="white"

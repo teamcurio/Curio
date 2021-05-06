@@ -1,16 +1,10 @@
 import React from "react";
 import { Heading } from "@chakra-ui/react";
-import { keyframes } from "@emotion/react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import ImageItem from "./ImageItem";
 import NavBar from "./NavBar";
 
-//Styling:
-const fadeIn = keyframes`
-  0% { opacity:0; }
-  100% { opacity:1; }
-  `;
 
 //GraphQl query string:
 const IMAGES_QUERY = gql`
