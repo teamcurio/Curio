@@ -52,15 +52,28 @@ const TagType = new GraphQLObjectType({
   }),
 });
 
+//Images type
 const ImagesType = new GraphQLObjectType({
   name: 'Images',
-  fields: () => ({
+  fields: {
     total: { type: GraphQLInt },
     objectIDs: { type: new GraphQLList(GraphQLInt) },
-    // Images: { type: new GraphQLList(ImageType) }
-  }),
+    info: {
+      type: new GraphQLList(ImageType),
+      resolve (parent){
+        return parent.objectIDs.map(id => {
+          return axios
+            .get(
+              `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
+            )
+            .then((response) => {
+              // console.log("Data", response.data)
+              return response.data}); 
+        })
+      }
+    }
+  },
 });
-
 
 //Root Query
 const RootQuery = new GraphQLObjectType({
@@ -77,34 +90,6 @@ const RootQuery = new GraphQLObjectType({
             `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${args.searchTerm}`
           )
           .then((response) => response.data);
-        //         .then(response => {
-        //           // console.log(response.objectIDs);
-        //           response.data.objectIDs.map(objectID => {
-        //             console.log('hi');
-        //             return axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`)
-        //               .then(objResponse => objResponse.data);
-        //           })
-        //         })
-        //         .then(response => response.data);
-        //     }
-        //   }
-        // }
-        // });
-
-
-        // .then(objResponse => {
-        //   // console.log(objResponse);
-        //   // const image = new ImageType
-        //   // images.push(objResponse);
-        //   // const obj = new ImageType;
-        //   // images.push(obj);
-        //   return objResponse;
-        // });
-        // });
-        // // console.log(images);
-        // console.log(finalResponse);
-        // return response;
-        // }));
       },
     },
     Image: {
