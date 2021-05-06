@@ -8,6 +8,31 @@ const IMAGES_QUERY = gql`
         Images(searchTerm: $searchTerm) {
             total
             objectIDs
+            info{
+                objectID
+                accessionYear
+                isPublicDomain
+                primaryImage
+                department
+                objectName
+                title
+                culture
+                period
+                artistDisplayName
+                artistDisplayBio
+                artistNationality
+                objectDate
+                objectBeginDate
+                objectEndDate
+                objectUrl
+                constituents{
+                  constituentID
+                  name
+                }
+                tags{
+                  term
+                } 
+            }
         }
     }
 `

@@ -35,7 +35,7 @@ class App extends Component {
             <Route exact path="/login" component={LogIn} />
             <Route exact path='/images' render={(props) => <ImageContainer {...props} imgArr = {arr} />} />
             <Route exact path='/favorites' render={(props) => <ImageContainer {...props} imgArr = {favorites(localStorage.getItem(curioUser))} />} />
-            <Route exact path="/login" component={LogIn} />
+            {/* <Route exact path="/login" component={LogIn} /> */}
             <Route exact path='/signup' component={SignUp} />
           </Switch>
         </div>

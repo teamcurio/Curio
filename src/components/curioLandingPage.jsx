@@ -20,29 +20,9 @@ import { SearchIcon } from "@chakra-ui/icons"
 import NavBar from './NavBar'
 
 const LandingPage = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const handleSearchValue = (e) => setSearchValue(e.target.searchValue);
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearchTerm = (e) => setSearchTerm(e.target.value);
 
-  const handleSubmitSearch = () => {
-    let data = new URLSearchParams();
-    data.append("searchValue", searchValue);
-
-    fetch("/search", {
-      method: 'post',
-      body: data
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (jsonData) {
-        console.log(jsonData);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // (C) PREVENT HTML FORM SUBMIT
-    return false;
-  };
   return (
     <div>
       {/* <Box position='fixed' width='100%' color='white' h='40px' bg='black' border='solid' borderBottomRadius='15px'>
@@ -53,7 +33,7 @@ const LandingPage = () => {
           <Heading margin='auto' size='4xl'>Curio</Heading>
           <Text>A personally curated art experience</Text>
           <Box>
-            <form onSubmit={handleSubmitSearch}>
+            <form >
               <InputGroup className='inputTerm' size="md" pr="4.5rem">
                 <Input _placeholder={{ color: 'black' }}
                   pr="4.5rem"
@@ -61,13 +41,13 @@ const LandingPage = () => {
                   borderColor='black'
                   color='black'
                   placeholder='Enter Search Term'
-                  onChange={handleSearchValue}
+                  onChange={handleSearchTerm}
                 />
                 <InputRightElement width="4.5rem">
                   {/* <Button type="submit" bg='black' color='white' >
                     Search
               </Button> */}
-                  <Link to="/images">
+                  <Link to={{pathname: "/images", state: {searchTerm}}} >
                     <IconButton type='submit' aria-label="search" icon={<SearchIcon />} />
                   </Link>
                 </InputRightElement>
