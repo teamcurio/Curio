@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Spacer, Stack, useColorMode, Text, VStack, HStack, IconButton } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
-
+import { StarIcon } from "@chakra-ui/icons"
 
 
 const fadeIn = keyframes`
@@ -19,10 +19,12 @@ const fadeIn = keyframes`
 const ImageContainer = (props) => {
   console.log(props);
 
-const arr = props.imgArr
+  const arr = props.imgArr
 
   const [value, setValue] = React.useState(1);
   const [delay, setDelay] = React.useState(5000);
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const handleChange = e => {
     if (e.target.id === "+") {
@@ -55,6 +57,12 @@ const arr = props.imgArr
   return (
     <>
       <div>
+        <Text align='center' mt='40px' color='black'>Title</Text>
+      </div>
+      <Stack direction={['column, row']} spacing='24px'>
+        <Spacer></Spacer>
+        <button style={{ outline: 'none' }} onClick={handleChange} id="-">{`<<<`}</button>
+        <Spacer></Spacer>
         {arr.map((item, key) => {
           return (
             <Box
@@ -63,12 +71,14 @@ const arr = props.imgArr
               backgroundPosition="center"
               backgroundSize="cover"
               backgroundRepeat="no-repeat"
-              width="100vw"
-              height="80vh"
+              width="80vw"
+              height="60vh"
               animation={`${fadeIn} ease 3s`}
               display={item.show}
               key={key}
-              mt='40px'
+              mt='10px'
+              ml='auto'
+              mr='auto'
             >
               <div
                 style={{
@@ -86,21 +96,42 @@ const arr = props.imgArr
                     alignItems: "center"
                   }}
                 >
-                  <div style={{ color: "#fff" }}>hola</div>
-                  <div style={{ color: "#fff" }}>hola</div>
+                  {/* <div style={{ color: "#fff" }}>hola</div>
+                  <div style={{ color: "#fff" }}>hola</div> */}
                 </div>
               </div>
             </Box>
           );
         })}
-      </div>
-
-      <div>
-        <button onClick={handleChange} id="-">{`<<<`}</button>
-        <button onClick={handleChange} id="+">
+        <Spacer></Spacer>
+        <button style={{ outline: 'none' }} onClick={handleChange} id="+">
           {`>>>`}{" "}
         </button>
-      </div>
+        <Spacer></Spacer>
+      </Stack>
+      <Box backgroundColor="white"
+        border='1px solid black'
+        backgroundSize="cover"
+        width="80vw"
+        height="21vh"
+        mt='10px'
+        ml='auto'
+        mr='auto'>
+        <VStack>
+          <Text align='center'>Artist</Text>
+          <Text align='center'>Date</Text>
+          <Text align='center'>Description</Text>
+        </VStack>
+        <HStack justifyContent='space-between'>
+          <Button align='left' onClick={toggleColorMode}>
+            Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+          </Button>
+          {/* <Spacer></Spacer>
+          <Spcaer></Spcaer> */}
+          <IconButton aria-label="favorite" icon={<StarIcon />} />
+          {/* </Button> */}
+        </HStack>
+      </Box>
     </>
   );
 }
@@ -123,15 +154,6 @@ function useInterval(callback, delay) {
     }
   }, [delay]);
 }
-
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<App />, rootElement);
-
-// return (
-//   <div>
-//     Images Here;
-//   </div>
-// )
 
 
 export default ImageContainer;

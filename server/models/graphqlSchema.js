@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 const {
   GraphQLObjectType,
   GraphQLInt,
@@ -7,6 +7,7 @@ const {
   GraphQLList,
   GraphQLSchema,
 } = require('graphql');
+
 // const { ModuleFilenameHelpers } = require("webpack");
 
 //Image Type
@@ -51,12 +52,27 @@ const TagType = new GraphQLObjectType({
   }),
 });
 
+//Images type
 const ImagesType = new GraphQLObjectType({
   name: 'Images',
-  fields: () => ({
+  fields: {
     total: { type: GraphQLInt },
     objectIDs: { type: new GraphQLList(GraphQLInt) },
-  }),
+    info: {
+      type: new GraphQLList(ImageType),
+      resolve (parent){
+        return parent.objectIDs.map(id => {
+          return axios
+            .get(
+              `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
+            )
+            .then((response) => {
+              // console.log("Data", response.data)
+              return response.data}); 
+        })
+      }
+    }
+  },
 });
 
 //Root Query
