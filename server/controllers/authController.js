@@ -26,6 +26,7 @@ authController.verifyUser = (req, res, next) => {
       if (isMatch) {
         const { id, email } = response.rows[0];
         res.locals.user = { id, email };
+        console.log('we hit password matches from frontend');
         return next();
       } else {
         return next({
@@ -50,6 +51,7 @@ authController.generateJWT = (req, res, next) => {
   let token = jwt.sign({ id: res.locals.user.id }, process.env.JWT_SECRET, {
     expiresIn: 600,
   });
+  console.log('token for frontend', token);
   res.locals.token = token;
   return next();
 };

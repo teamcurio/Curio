@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Box, Button, Spacer, Stack, useColorMode, Text, VStack, HStack, IconButton } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { StarIcon } from "@chakra-ui/icons"
+import NavBar from './NavBar';
 
 
 const fadeIn = keyframes`
@@ -56,6 +57,7 @@ const ImageContainer = (props) => {
   }, delay);
   return (
     <>
+    <NavBar />
       <div>
         <Text align='center' mt='40px' color='black'>Title</Text>
       </div>
