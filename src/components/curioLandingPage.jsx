@@ -45,9 +45,9 @@ const LandingPage = () => {
   };
   return (
     <div>
-      {/* <Box position='fixed' width='100%' color='white' h='40px' bg='black' border='solid' borderBottomRadius='15px'>
+
         <NavBar />
-      </Box> */}
+
       <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
         <VStack margin='auto' spacing={1} direction="row" align="center" padding="4">
           <Heading margin='auto' size='4xl'>Curio</Heading>

@@ -27,7 +27,11 @@ const NavBar = () => {
   const handleSearchValue = (e) => setSearchValue(e.target.searchValue);
   const [isLoggedIn, setLogin] = useState(Boolean(localStorage.getItem('curioUser')))
 
-  // useEffect(, isLoggedIn)
+  useEffect(()=> {
+    function handleLogStatus() {
+      setLogin(Boolean(localStorage.getItem('curioUser')))
+    }
+  },[isLoggedIn])
 
   const handleSubmitSearch = () => {
     let data = new URLSearchParams();
@@ -52,7 +56,10 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('curioUser');
-    setLogin()
+    localStorage.removeItem('curioToken');
+    // handleLogStatus();
+    setLogin(Boolean(localStorage.getItem('curioUser')))
+    console.log(isLoggedIn);
     history.push('/');
   }
 
@@ -96,10 +103,11 @@ console.log(localStorage.getItem('curioUser'))
         Favorites
       </Button>
       </Link>)}
+      {isLoggedIn}
         {/* <NavBar /> */}
         {/* </Box> */}
         {/* <Box> */}
-        {!localStorage.getItem('curioUser') ? (
+        {!isLoggedIn ? (
         <Link to="/login">
           <Button float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }} >
             Log In
