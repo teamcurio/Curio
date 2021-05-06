@@ -44,10 +44,10 @@ const IMAGES_QUERY = gql`
 const ImageContainer = (props) => {
   const { searchTerm } = props.location.state;
 
+  
   return (
     <>
-      <NavBar />
-
+      <NavBar displaySearch={true}/>
       <div>
         <Query query={IMAGES_QUERY} variables={{ searchTerm }}>
           {({ loading, error, data }) => {

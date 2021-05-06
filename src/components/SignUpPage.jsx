@@ -105,7 +105,7 @@ const SignUp = () => {
 
   return (
     <LightMode>
-      <NavBar />
+      <NavBar displaySearch={true}/>
       <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
         <Box>
           <Container
@@ -118,27 +118,8 @@ const SignUp = () => {
             rounded="5%"
             bg='whitesmoke'
           >
-            {/* <Text
-              colorScheme="blue"
-              textAlign="center"
-              letterSpacing="2px"
-              mb={2}
-            >
-              Begin your views
-          </Text> */}
             <Container marginBottom="1px solid silver" justifyContent="column">
               <form onSubmit={handleNewUserSubmit}>
-                {/* <FormControl isRequired>
-                  <FormLabel>Username:</FormLabel>
-                  <Input
-                    onChange={handleAllInputChange}
-                    id="username"
-                    name="username"
-                  />
-                  <FormHelperText fontSize="12px" id="email-helper-text">
-                    Set up a username
-                </FormHelperText>
-                </FormControl> */}
                 <FormControl isRequired mt="10px">
                   <FormLabel>Email:</FormLabel>
                   <Input
@@ -206,7 +187,6 @@ const SignUp = () => {
               <Flex justifyContent='space-evenly' padding={5}>
                 <Text fontSize='12px'>Have an account?</Text>
                 <NavLink to="/login">
-                  {/* <Text mt="10px" fontSize="12px" textDecoration='underline'> */}
                   <Text fontSize="12px" textDecoration='underline'>
                     Log In
                 </Text>

@@ -3,8 +3,6 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { Switch, Route } from 'react-router-dom';
 import LandingPage from './curioLandingPage';
-import CurioHomePage from './CurioHomePage';
-import Images from './Images';
 import LogIn from './LogInPage';
 import SignUp from './SignUpPage';
 import NavBar from './NavBar';
@@ -20,21 +18,15 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        {/* <NavBar /> */}
         <div className='router'>
-          {/* <CurioHomePage /> */}
           <Switch>
             <Route path='/' exact component={LandingPage} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path='/images' component={ImageContainer} />
-            <Route exact path='/favorites' render={(props) => <ImageContainer {...props} imgArr={favorites(localStorage.getItem(curioUser))} />} />
+            <Route exact path='/favorites' render={(props) => <ImageContainer { ...props} imgArr={favorites(localStorage.getItem(curioUser))} />} />
             <Route exact path='/signup' component={SignUp} />
           </Switch>
         </div>
-        {/* <Images /> */}
-        {/* // display component */}
-        {/* // description component */}
-        {/* // footer */}
       </ApolloProvider>
     )
   }
