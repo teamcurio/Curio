@@ -60,8 +60,6 @@ const IMAGES_QUERY = gql`
 const ImageContainer = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { searchTerm } = props.location.state;
-  const handleChange = (e) => {
-  
   return (
     <>
       <NavBar displaySearch={true}/>
@@ -82,5 +80,6 @@ const ImageContainer = (props) => {
     </>
   );
 };
+
 
 export default ImageContainer;
