@@ -15,44 +15,25 @@ import {
   FormLabel,
   Grid,
   GridItem,
+  IconButton
 } from "@chakra-ui/react";
+import {SearchIcon} from "@chakra-ui/icons";
 
 
 
-const NavBar = () => {
-
+const NavBar = (props) => {
   const history = useHistory();
 
-  const [searchValue, setSearchValue] = useState("");
-  const handleSearchValue = (e) => setSearchValue(e.target.searchValue);
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearchTerm = (e) => setSearchTerm(e.target.value);
   const [isLoggedIn, setLogin] = useState(Boolean(localStorage.getItem('curioUser')))
+  
 
   useEffect(()=> {
     function handleLogStatus() {
       setLogin(Boolean(localStorage.getItem('curioUser')))
     }
   },[isLoggedIn])
-
-  const handleSubmitSearch = () => {
-    let data = new URLSearchParams();
-    data.append("searchValue", searchValue);
-
-    fetch("/search", {
-      method: 'post',
-      body: data
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (jsonData) {
-        console.log(jsonData);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // (C) PREVENT HTML FORM SUBMIT
-    return false;
-  };
 
   const handleLogout = () => {
     localStorage.removeItem('curioUser');
@@ -67,35 +48,8 @@ console.log(localStorage.getItem('curioUser'))
   return (
     <Flex justifyContent='center'>
     
-     {/* !localStorage.getItem('curioUser') &&  */}
+   
 
-
-    
-      {/*<Spacer />
-      <Box>
-        <Button type="submit" colorScheme="blue">
-          Genres
-        </Button>
-      </Box>
-      <Spacer />
-      <Spacer /> */}
-      {/* <Box>
-        <form onSubmit={handleSubmitSearch}>
-          <InputGroup size="md" pr="4.5rem">
-            <Input
-              pr="4.5rem"
-              placeholder="Search Term"
-              name="search"
-              onChange={handleSearchValue}
-            />
-            <InputRightElement width="4.5rem">
-              <Button type="submit" colorScheme="blue" >
-                Search
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        </form>
-      </Box> */}
       <Spacer />
       <Box position='fixed' width='100%' color='white' h='40px' bg='black' border='solid' borderBottomRadius='15px'>
       {localStorage.getItem('curioUser') && (<Link to='/favorites'>
@@ -103,10 +57,27 @@ console.log(localStorage.getItem('curioUser'))
         Favorites
       </Button>
       </Link>)}
-      {isLoggedIn}
-        {/* <NavBar /> */}
-        {/* </Box> */}
-        {/* <Box> */}
+      
+      {props.displaySearch && 
+      <Box>
+      <form >
+              <InputGroup className='searchTerm' size="md" pr="4.5rem">
+                <Input _placeholder={{ color: 'black' }}
+                  pr="4.5rem"
+                  name="search"
+                  borderColor='black'
+                  color='black'
+                  placeholder='Enter Search Term'
+                  onChange={handleSearchTerm}
+                />
+                <InputRightElement width="4.5rem">
+                  <Link to={{pathname: "/images", state: {searchTerm}}} >
+                    <IconButton type='submit' aria-label="search" icon={<SearchIcon />} />
+                  </Link>
+                </InputRightElement>
+              </InputGroup>
+            </form>
+            </Box>} 
         {!isLoggedIn ? (
         <Link to="/login">
           <Button float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }} >
@@ -119,29 +90,6 @@ console.log(localStorage.getItem('curioUser'))
           Sign Out
       </Button>
       </Link>)}
-        {/* <Box>
-      <Stack spacing={4} direction="row" align="center" padding="0">
-    <Link to="/signup">
-      <Button
-        border="2px"
-        borderColor="teal.500"
-        colorScheme="teal"
-        variant="solid"
-      >
-        Sign up
-      </Button>
-    </Link>
-    <Link to="/login">
-      <Button
-        border="2px"
-        borderColor="purple"
-        colorScheme="purple"
-        variant="solid"
-      >
-        Login
-      </Button>
-    </Link>
-        </Stack> */}
       </Box>
     </Flex>
 
