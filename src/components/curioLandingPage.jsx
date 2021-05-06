@@ -25,9 +25,7 @@ const LandingPage = () => {
 
   return (
     <div>
-
-        <NavBar />
-
+      <NavBar displaySearch={false}/>
       <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
         <VStack margin='auto' spacing={1} direction="row" align="center" padding="4">
           <Heading margin='auto' size='4xl'>Curio</Heading>
@@ -44,9 +42,7 @@ const LandingPage = () => {
                   onChange={handleSearchTerm}
                 />
                 <InputRightElement width="4.5rem">
-                  {/* <Button type="submit" bg='black' color='white' >
-                    Search
-              </Button> */}
+            
                   <Link to={{pathname: "/images", state: {searchTerm}}} >
                     <IconButton type='submit' aria-label="search" icon={<SearchIcon />} />
                   </Link>
@@ -54,31 +50,7 @@ const LandingPage = () => {
               </InputGroup>
             </form>
           </Box>
-          {/* <Stack spacing={4} direction="row" align="center" padding="4"> */}
-          {/* <Link to="/signup">
-          <Button
-            border="2px"
-            borderColor="teal.500"
-            colorScheme="teal"
-            variant="solid"
-          >
-            Sign up
-      </Button>
-        </Link>
-        <Link to="/login">
-          <Button
-            border="2px"
-            borderColor="purple"
-            colorScheme="purple"
-            variant="solid"
-          >
-            Login
-      </Button>
-        </Link> */}
         </VStack>
-        {/* <Box w='100%' h='100%' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'></Box> */}
-
-
       </Flex>
     </div >
   )

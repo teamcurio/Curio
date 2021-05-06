@@ -12,9 +12,6 @@ const ImageItem = (props) => {
     value === 0 ? setValue(images.length - 1) : setValue(value - 1);
   }
 
-  // useEffect(() => {
-  //   console.log(value);
-  // }, [value])
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
@@ -46,8 +43,6 @@ const ImageItem = (props) => {
               backgroundRepeat="no-repeat"
               width="80vw"
               height="60vh"
-              // animation={`${fadeIn} ease 3s`}
-              // display={item.show}
               key={`item-${idx}`}
               mt="10px"
               ml="auto"

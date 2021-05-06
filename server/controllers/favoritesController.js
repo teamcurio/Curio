@@ -1,4 +1,4 @@
-const { isTypeSubTypeOf } = require("graphql");
+
 const db = require("../models/curioModel");
 
 const favoritesController = {};
@@ -6,25 +6,10 @@ const favoritesController = {};
 //GET FAVORITES CONTROLLER:
 favoritesController.getFavorites = async (req, res, next) => {
   const user_id = res.locals.user_id;
-  console.log("user id", user_id);
-
   const getFaveQuery = `SELECT image_id FROM "Favorites" WHERE user_id=$1`;
   const value = [user_id];
 
-  //OPTION 1: Query using .then:
-  /* 
-  db.query(getFaveQuery, value)
-    .then((data) => {
-      console.log(data.rows);
-      res.locals.favorites = data.rows;
-      return next();
-    })
-    .catch((err) => {
-      return next({
-        message: { err: "Error getting favorites from database" },
-      });
-    });
-    */
+
 
   //OPTION 2: Query using async/await:
   try {
@@ -43,7 +28,6 @@ favoritesController.getFavorites = async (req, res, next) => {
 //ADD FAVORITES CONTROLLER:
 favoritesController.addFavorite = async (req, res, next) => {
   const { image_id, user_id } = req.body;
-  // const user_id = res.locals.user_id;
 
   const addFaveQuery = `INSERT INTO "Favorites" (user_id, image_id) VALUES ($1, $2) RETURNING *`;
   const values = [user_id, image_id];
