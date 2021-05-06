@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 const {
   GraphQLObjectType,
   GraphQLInt,
@@ -7,6 +7,7 @@ const {
   GraphQLList,
   GraphQLSchema,
 } = require('graphql');
+
 // const { ModuleFilenameHelpers } = require("webpack");
 
 //Image Type
