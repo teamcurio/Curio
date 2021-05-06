@@ -12,12 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
-const ImageItem = (props) => {
+const ImageItem = ({images}) => {
   const [value, setValue] = useState(0);
   const { colorMode, toggleColorMode } = useColorMode();
 
   //Filter out only images that can be shown publicly 
-  const images = props.images.filter((image) => image.isPublicDomain === true);
+   images = images.filter((image) => image.isPublicDomain === true);
 
   //Handle function to move images carousel forwards and backwards
   const incrementItem = () => {
@@ -27,11 +27,12 @@ const ImageItem = (props) => {
     value === 0 ? setValue(images.length - 1) : setValue(value - 1);
   };
 
-    // Set up the interval.
+  // SetInterval to move through array of images at a set timer
   useEffect(() => {
     setInterval(() => {
       value === images.length - 1 ? setValue(0) : setValue(value + 1);
-    }, 3000);
+    }, 10000);
+    return () => clearInterval()
   }, [value]);
 
 
