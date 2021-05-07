@@ -92,7 +92,7 @@ const SignUp = () => {
           localStorage.setItem('curioToken', data.token);
           localStorage.setItem('curioUser', data.user);
           history.push('/')
-          ;
+            ;
         })
         .catch((error) => {
           title = "Error";
@@ -105,7 +105,7 @@ const SignUp = () => {
 
   return (
     <LightMode>
-      <NavBar displaySearch={false}/>
+      <NavBar displaySearch={false} />
       <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
         <Box>
           <Container
@@ -171,16 +171,19 @@ const SignUp = () => {
                     Set up a password
                 </FormHelperText>
                 </FormControl>
-                <Button
-                  ml="60px"
-                  mt={4}
-                  type="submit"
-                  background='#ebc765' 
-                  color="black"
-                  _hover={{ color: 'white', background:"black" }}
-                >
-                  Sign Up
+                <Flex>
+                  <Button
+                    ml="auto"
+                    mr='auto'
+                    mt={4}
+                    type="submit"
+                    background='#ebc765'
+                    color="black"
+                    _hover={{ color: 'white', background: "black" }}
+                  >
+                    Sign Up
               </Button>
+                </Flex>
               </form>
             </Container>
             <Container>
