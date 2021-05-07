@@ -54,7 +54,7 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
       toast({
         title: toastMessage.title,
         description: toastMessage.description,
-        status: "warning",
+        status: toastMessage.status,
         duration: toastMessage.duration,
         isClosable: true,
         position: "bottom-left",
@@ -88,7 +88,9 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
         title = 'Success';
         description = `${data}`;
         duration = 9000;
-        setToastMessage({ title, description, duration });
+        status= "success"
+        setToastMessage({ title, description, duration , status});
+        setValue(0)
         // setImages(images.filter(item => item.image_id !== images[value].image_id))
         setToggle(true);
       })
@@ -96,7 +98,8 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
         title = 'error';
         description = `${error.err}`;
         duration = 9000;
-        setToastMessage({ title, description, duration });
+        status= "error"
+        setToastMessage({ title, description, duration , status});
       });
   };
 
