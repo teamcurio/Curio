@@ -54,7 +54,7 @@ const LogIn = () => {
     let title;
     let description;
     let duration;
-    console.log('currentUser',currentUser);
+    console.log('currentUser', currentUser);
     fetch('/auth/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -69,7 +69,7 @@ const LogIn = () => {
         localStorage.setItem('curioToken', data.token);
         localStorage.setItem('curioUser', data.user);
         history.push('/')
-        ;
+          ;
       })
       .catch((error) => {
         title = 'error';
@@ -83,7 +83,7 @@ const LogIn = () => {
   return (
     <>
       <LightMode>
-        <NavBar displaySearch={false}/>
+        <NavBar displaySearch={false} />
         <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
           <Box>
             <Container
@@ -125,16 +125,19 @@ const LogIn = () => {
                       The password you used to signup with
                 </FormHelperText>
                   </FormControl>
-                  <Button
-                    ml="80px"
-                    mt={4}
-                    background='#ebc765' 
-                    color="black"
-                    type="submit"
-                    _hover={{ color: 'white', background:"black" }}
-                  >
-                    Log In
+                  <Flex>
+                    <Button
+                      ml="auto"
+                      mr='auto'
+                      mt={4}
+                      background='#ebc765'
+                      color="black"
+                      type="submit"
+                      _hover={{ color: 'white', background: "black" }}
+                    >
+                      Log In
               </Button>
+                  </Flex>
                 </form>
               </Container>
               <Container>
