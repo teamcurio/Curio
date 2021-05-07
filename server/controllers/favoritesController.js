@@ -27,8 +27,10 @@ favoritesController.getFavorites = async (req, res, next) => {
 
 //ADD FAVORITES CONTROLLER:
 favoritesController.addFavorite = async (req, res, next) => {
-  const { image_id, user_id } = req.body;
-
+  // console.log('req body', req.body);
+  // console.log('res locals', res.locals);
+  const { image_id } = req.body;
+  const user_id = res.locals.user_id;
   const addFaveQuery = `INSERT INTO "Favorites" (user_id, image_id) VALUES ($1, $2) RETURNING *`;
   const values = [user_id, image_id];
 
@@ -48,7 +50,8 @@ favoritesController.addFavorite = async (req, res, next) => {
   //OPTION 2: Query using async/await:
   try {
     const response = await db.query(addFaveQuery, values);
-    if (response) return next();
+    if (response) {
+      return next()};
   } catch (error) {
     return next({
       message: { err: "Error adding Favorite to database: " + error },
@@ -60,7 +63,7 @@ favoritesController.addFavorite = async (req, res, next) => {
 favoritesController.deleteFavorite = async (req, res, next) => {
   const { image_id } = req.body;
   const user_id = res.locals.user_id;
-
+ 
   const deleteFave = `DELETE FROM "Favorites" WHERE user_id=$1 AND image_id=$2 RETURNING *;`;
   const values = [user_id, image_id];
 
