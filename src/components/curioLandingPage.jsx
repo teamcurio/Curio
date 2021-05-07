@@ -26,6 +26,7 @@ const LandingPage = () => {
   return (
     <div>
       <NavBar displaySearch={false}/>
+     
       <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
         <VStack margin='auto' spacing={1} direction="row" align="center" padding="4">
           <Heading margin='auto' size='4xl'>Curio</Heading>
@@ -52,6 +53,7 @@ const LandingPage = () => {
           </Box>
         </VStack>
       </Flex>
+ 
     </div >
   )
 }

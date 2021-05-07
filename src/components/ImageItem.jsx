@@ -9,6 +9,10 @@ import {
   Button,
   IconButton,
   useColorMode,
+  Flex,
+  Square,
+  Center,
+  Image,
 } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { StarIcon, ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
@@ -19,6 +23,11 @@ const fadeIn = keyframes`
   100% { opacity:1; }
   `;
 
+
+
+
+
+  
 const ImageItem = ({ images }) => {
   const [value, setValue] = useState(0);
   const { colorMode, toggleColorMode } = useColorMode();
@@ -46,79 +55,69 @@ const ImageItem = ({ images }) => {
 
   return (
     <>
-      <div>
+      <div style={{ marginTop: "50px", marginBottom: "30px" }}>
         <Text align="center" mt="40px" color="black">
           {images[value].objectName}
         </Text>
       </div>
-      <Stack direction={["column, row"]} spacing="24px">
-        <Spacer />
-        {/* <button style={{ outline: "none" }} onClick={decrementItem} id="-"> */}
-          <IconButton aria-label="favorite"  icon={<ArrowBackIcon />} onClick={decrementItem} id="-"/>
-        {/* </button> */}
-        <Spacer />
-
+      <div style={{ height: "60vh" }}>
+        <Flex color="white">
+        <Square size="30vw" style={{marginLeft:"0px", paddingLeft:"0px", height: "60vh", align: "right"}}>
+        <Box flex="1" align="right" >
+            <IconButton
+              aria-label="favorite"
+              icon={<ArrowBackIcon style={{ color: "black" }} />}
+              onClick={incrementItem}
+              boxSize="60px"
+            />
+              </Box>
+          </Square>
+          <Box flex="1" align="center" size="40vw">
+            <Image
+              src={images[value].primaryImage}
+              alt={images[value].title}
+              boxSize="60vh"
+              size="475px"
+            />
+          </Box>
+          <Square  size="30vw" style={{ height: "60vh" } }>
+          <Box flex="1" align="left" >
+            <IconButton
+              aria-label="favorite"
+              icon={<ArrowForwardIcon style={{ color: "black" }} />}
+              onClick={decrementItem}
+              boxSize="60px"
+            />
+            </Box>
+          </Square>
+        </Flex>
+      </div>
+      <div style={{marginTop:"10px"}}>
         <Box
-          backgroundColor="#222"
-          backgroundImage={`url(${images[value].primaryImage})`}
-          backgroundPosition="center"
+          backgroundColor="white"
+          border="1px solid black"
           backgroundSize="cover"
-          backgroundRepeat="no-repeat"
-          animation={`${fadeIn} ease 3s`}
-          width="80vw"
-          height="60vh"
-          mt="10px"
+          width="30vw"
+          height="15vh"
           ml="auto"
           mr="auto"
         >
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              backdropFilter: "contrast(.8)",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                height: "inherit",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            ></div>
-          </div>
+          <VStack>
+            <Text align="center">{images[value].artistDisplayName}</Text>
+            <Text align="center">{images[value].objectDate}</Text>
+          </VStack>
+          <HStack justifyContent="space-between">
+            <Button align="left" onClick={toggleColorMode}>
+              Toggle {colorMode === "light" ? "Dark" : "Light"}
+            </Button>
+            <IconButton aria-label="favorite" icon={<StarIcon />} />
+          </HStack>
         </Box>
-
-        <Spacer />
-        <button style={{ outline: "none" }} onClick={incrementItem} id="+">
-          <IconButton aria-label="favorite" icon={<ArrowForwardIcon />} />
-        </button>
-        <Spacer />
-      </Stack>
-      <Box
-        backgroundColor="white"
-        border="1px solid black"
-        backgroundSize="cover"
-        width="80vw"
-        height="21vh"
-        mt="10px"
-        ml="auto"
-        mr="auto"
-      >
-        <VStack>
-          <Text align="center">{images[value].artistDisplayName}</Text>
-          <Text align="center">{images[value].objectDate}</Text>
-        </VStack>
-        <HStack justifyContent="space-between">
-          <Button align="left" onClick={toggleColorMode}>
-            Toggle {colorMode === "light" ? "Dark" : "Light"}
-          </Button>
-          <IconButton aria-label="favorite" icon={<StarIcon />} />
-        </HStack>
-      </Box>
+      </div>
     </>
   );
 };
 
 export default ImageItem;
+
+
