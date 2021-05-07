@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=production webpack serve --no-cache",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack serve & nodemon server/server.js"
+    "dev": "cross-env NODE_ENV=development webpack serve & nodemon server/server.js",
+    "cypress": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
+    "cypress": "^7.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
