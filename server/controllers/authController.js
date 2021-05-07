@@ -58,6 +58,8 @@ authController.generateJWT = (req, res, next) => {
 authController.verifyJWT = (req, res, next) => {
   //TODO:Check token
   let token = req.headers["authorization"];
+  console.log('\n\n🚀 ~ file: authController.js ~ line 61 ~ token', token);
+  
 
   if (token.startsWith("Bearer ")) {
     // Remove Bearer from string
