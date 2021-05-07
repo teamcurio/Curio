@@ -105,7 +105,7 @@ const SignUp = () => {
 
   return (
     <LightMode>
-      <NavBar displaySearch={true}/>
+      <NavBar displaySearch={false}/>
       <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
         <Box>
           <Container
@@ -172,11 +172,12 @@ const SignUp = () => {
                 </FormHelperText>
                 </FormControl>
                 <Button
-                  colorScheme="cyan"
-                  color="white"
                   ml="60px"
                   mt={4}
                   type="submit"
+                  background='#ebc765' 
+                  color="black"
+                  _hover={{ color: 'white', background:"black" }}
                 >
                   Sign Up
               </Button>
@@ -193,6 +194,11 @@ const SignUp = () => {
                 </NavLink>
               </Flex>
             </Container>
+            {/* <NavLink to='/'>
+              <Text align='center' textDecoration='underline'>
+                Return to Home Page
+              </Text>
+            </NavLink> */}
           </Container>
         </Box>
       </Flex>
