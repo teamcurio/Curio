@@ -57,9 +57,7 @@ authController.generateJWT = (req, res, next) => {
 //VERIFY JWT TOKEN CONTROLLER:
 authController.verifyJWT = (req, res, next) => {
   //TODO:Check token
-  console.log("Req.header-->", req.headers);
   let token = req.headers["authorization"];
-  console.log("token in verifyJWT", token);
 
   if (token.startsWith("Bearer ")) {
     // Remove Bearer from string
@@ -72,13 +70,11 @@ authController.verifyJWT = (req, res, next) => {
     });
   }
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    console.log("Token and Decoded-->", { token, decoded });
     if (err) {
       return res.status(401).send({
         message: { err: 'Unauthorized!' },
       });
     }
-    console.log('decoded.id in jwt.verify is: ', decoded.id);
     res.locals.user_id = decoded.id;
     return next();
   });

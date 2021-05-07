@@ -43,7 +43,6 @@ userController.createUser = async (req, res, next) => {
       return next();
     })
     .catch((err) => {
-      console.log("Error caught in userController.createUser", err);
       if (err.constraint === "Users_email_key") {
         return next({
           message: { err: "Email already exists" },

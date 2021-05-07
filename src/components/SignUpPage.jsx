@@ -15,14 +15,13 @@ import {
   Heading,
   VStack
 } from "@chakra-ui/react";
+import NavBar from './NavBar';
 
 // import { useAuth } from "../useAuth";
 
 const SignUp = () => {
-  // const auth = useAuth();
   const [newUser, setNewUserField] = useState({
-    username: "",
-    // useremail: '',
+    email: "",
     password: "",
     confirmedUserPassword: "",
   });
@@ -74,7 +73,7 @@ const SignUp = () => {
     let description;
     let duration;
     if (errorStatus) {
-      fetch("/member/signup", {
+      fetch("/auth/signup", {
         method: "Post",
         headers: {
           "Content-Type": "application/json",
@@ -89,11 +88,12 @@ const SignUp = () => {
             throw data;
           });
         })
-        // .then((data) =>
-        //   auth.signInFunc(data.user.id, data.user.username, () =>
-        //     history.replace("/time/home")
-        //   )
-        // )
+        .then((data) => {
+          localStorage.setItem('curioToken', data.token);
+          localStorage.setItem('curioUser', data.user);
+          history.push('/')
+          ;
+        })
         .catch((error) => {
           title = "Error";
           description = `${error.err}`;
@@ -105,6 +105,7 @@ const SignUp = () => {
 
   return (
     <LightMode>
+      <NavBar displaySearch={true}/>
       <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
         <Box>
           <Container
@@ -117,27 +118,8 @@ const SignUp = () => {
             rounded="5%"
             bg='whitesmoke'
           >
-            {/* <Text
-              colorScheme="blue"
-              textAlign="center"
-              letterSpacing="2px"
-              mb={2}
-            >
-              Begin your views
-          </Text> */}
             <Container marginBottom="1px solid silver" justifyContent="column">
               <form onSubmit={handleNewUserSubmit}>
-                {/* <FormControl isRequired>
-                  <FormLabel>Username:</FormLabel>
-                  <Input
-                    onChange={handleAllInputChange}
-                    id="username"
-                    name="username"
-                  />
-                  <FormHelperText fontSize="12px" id="email-helper-text">
-                    Set up a username
-                </FormHelperText>
-                </FormControl> */}
                 <FormControl isRequired mt="10px">
                   <FormLabel>Email:</FormLabel>
                   <Input
@@ -205,7 +187,6 @@ const SignUp = () => {
               <Flex justifyContent='space-evenly' padding={5}>
                 <Text fontSize='12px'>Have an account?</Text>
                 <NavLink to="/login">
-                  {/* <Text mt="10px" fontSize="12px" textDecoration='underline'> */}
                   <Text fontSize="12px" textDecoration='underline'>
                     Log In
                 </Text>

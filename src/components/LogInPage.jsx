@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-
 import {
   FormHelperText,
   FormControl,
@@ -15,16 +14,13 @@ import {
   useToast,
   Spacer
 } from '@chakra-ui/react';
+import NavBar from './NavBar';
 
-// import Footer from '../components/Footer';
-// import { useAuth } from '../useAuth';
 
 const LogIn = () => {
-  // const auth = useAuth();
-
   // this sets the current state using the useState hook;
   const [currentUser, setCurrentUserField] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   // this sets the toast parts according to errors/actions
@@ -50,7 +46,6 @@ const LogIn = () => {
     event.preventDefault();
     const { name, value } = event.target;
     setCurrentUserField({ ...currentUser, [name]: value });
-    // console.log(event.target.value);
   };
   // backend function passed down in props that will take the currentUser as input;
 
@@ -59,23 +54,21 @@ const LogIn = () => {
     let title;
     let description;
     let duration;
-
-    fetch('/member/login', {
+    console.log('currentUser',currentUser);
+    fetch('/auth/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(currentUser),
     })
       .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        return res.json().then((data) => {
-          throw data;
-        });
+
+        return res.json();
       })
       .then((data) => {
-        localStorage.setItem(`curioUser`, data.user_id);
-          history.push('/favorites')
+        console.log('data', data);
+        localStorage.setItem('curioToken', data.token);
+        localStorage.setItem('curioUser', data.user);
+        history.push('/')
         ;
       })
       .catch((error) => {
@@ -90,20 +83,9 @@ const LogIn = () => {
   return (
     <>
       <LightMode>
+        <NavBar displaySearch={true}/>
         <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
           <Box>
-            {/* <Box
-              mb="20px"
-              width="100%"
-              overflow="hidden"
-              border="1px"
-              borderColor="cyan.400"
-              background="cyan.300"
-            >
-              <Text textAlign="center" letterSpacing="2px" mb={2}>
-                Curio
-          </Text>
-            </Box> */}
             <Container
               border="3px solid black"
               margin='auto'
@@ -119,9 +101,9 @@ const LogIn = () => {
                   <FormControl isRequired>
                     <FormLabel>Email:</FormLabel>
                     <Input
-                      id="username"
+                      id="email"
                       onChange={handleInputChange}
-                      name="username"
+                      name="email"
                       borderColor='black'
                       color='black'
                     />
@@ -154,10 +136,6 @@ const LogIn = () => {
               </Button>
                 </form>
               </Container>
-              {/* <Flex mt="30px" justifyContent="space-between">
-            <Button colorScheme="teal" mb="10px" mr="10px"><Text fontSize="12px">Login with Facebook</Text></Button>
-            <Button colorScheme="purple"><Text fontSize="12px">Login with Google</Text></Button>
-          </Flex> */}
               <Container>
                 <Flex justifyContent="space-evenly" padding={3}>
                   <Text fontSize="12px">Don't have an account?</Text>
@@ -167,11 +145,9 @@ const LogIn = () => {
                     </Text>
                   </NavLink>
                 </Flex>
-                {/* <NavLink to="/resetPassword"><Text id="forgotPassword" ml="30px" pt="5px" fontSize="10px">Forgot username and password?</Text></NavLink> */}
               </Container>
             </Container>
           </Box>
-          {/* <Footer mt={3} /> */}
         </Flex>
       </LightMode>
     </>
