@@ -58,7 +58,7 @@ const ImageItem = ({ images }) => {
       toast({
         title: toastMessage.title,
         description: toastMessage.description,
-        status: "warning",
+        status: toastMessage.status,
         duration: toastMessage.duration,
         isClosable: true,
         position: "bottom-left",
@@ -105,13 +105,15 @@ const ImageItem = ({ images }) => {
         title = 'Success';
         description = `${data}`;
         duration = 9000;
-        setToastMessage({ title, description, duration });
+        status= 'success'
+        setToastMessage({ title, description, duration , status});
       })
       .catch((error) => {
         title = 'error';
         description = `${error.err}`;
         duration = 9000;
-        setToastMessage({ title, description, duration });
+        status= 'error'
+        setToastMessage({ title, description, duration, status });
       });
   };
 

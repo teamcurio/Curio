@@ -59,10 +59,13 @@ const NavBar = (props) => {
       <Spacer />
       <Spacer />
       {props.displaySearch &&
-        <Stack direction={['column', 'row']}>
-          <Input _placeholder={{ color: 'black' }}
+        // 
+          <form>
+          <InputGroup className='inputTerm' pr="3.5rem">
+          <Stack direction={['column','row']}>
+            <Input _placeholder={{ color: 'black' }}
             align='center'
-            pr="4.5rem"
+            pr="4rem"
             name="search"
             borderColor='white'
             bg='white'
@@ -72,10 +75,15 @@ const NavBar = (props) => {
             size='xs'
             mt='5px'
           />
+          <InputRightElement width="4.5rem">
           <Link to={{ pathname: "/images", state: { searchTerm } }} >
-            <IconButton size='sm' colorScheme='blackalpha' type='submit' aria-label="search" icon={<SearchIcon />} />
+            <IconButton size='xs' colorScheme='blackAlpha' type='submit' aria-label="search" icon={<SearchIcon />} />
           </Link>
-        </Stack>
+          </InputRightElement>
+          </Stack>
+          </InputGroup>
+          </form>
+        // 
       }
       <Spacer></Spacer>
       <Spacer></Spacer>
