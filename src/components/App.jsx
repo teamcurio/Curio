@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom';
 import LandingPage from './CurioLandingPage';
 import LogIn from './LogInPage';
 import SignUp from './SignUpPage';
-import NavBar from './NavBar';
 import ImageContainer from './ImageContainer';
 import FavoritesContainer from "./FavoritesContainer";
 

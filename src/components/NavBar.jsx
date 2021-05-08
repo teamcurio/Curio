@@ -1,32 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, Route, useHistory } from "react-router-dom";
-
-import {
-  Button,
-  Flex,
-  Spacer,
-  InputGroup,
-  InputRightElement,
-  Box,
-  Input,
-  Stack,
-  FormLabel,
-  Grid,
-  GridItem,
-  IconButton,
-  Text,
-} from "@chakra-ui/react";
+import { Link, useHistory } from "react-router-dom";
+import { Flex, Spacer, Input, Stack, IconButton, Text } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 const NavBar = (props) => {
   const history = useHistory();
-
   const [searchTerm, setSearchTerm] = useState("");
-  const handleSearchTerm = (e) => setSearchTerm(e.target.value);
   const [isLoggedIn, setLogin] = useState(
     Boolean(localStorage.getItem("curioUser"))
   );
+  const handleSearchTerm = (e) => setSearchTerm(e.target.value);
 
   useEffect(() => {
     function handleLogStatus() {
@@ -39,11 +23,10 @@ const NavBar = (props) => {
     localStorage.removeItem("curioToken");
     // handleLogStatus();
     setLogin(Boolean(localStorage.getItem("curioUser")));
-    console.log(isLoggedIn);
     history.push("/");
   };
 
-  console.log(localStorage.getItem("curioUser"));
+  // console.log(localStorage.getItem("curioUser"));
   return (
     <Flex
       width="100%"

@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Stack,
-  Spacer,
-  VStack,
-  HStack,
   Text,
-  Button,
   IconButton,
-  useColorMode,
   Image,
   useToast,
   Flex,
   Square,
-  Center,
 } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { StarIcon, ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
@@ -26,7 +19,6 @@ const fadeIn = keyframes`
 
 const ImageItem = ({ images }) => {
   const [value, setValue] = useState(0);
-  const { colorMode, toggleColorMode } = useColorMode();
 
   const toast = useToast();
 
@@ -52,6 +44,7 @@ const ImageItem = ({ images }) => {
   }, [value]);
   const [toastMessage, setToastMessage] = useState(undefined);
 
+  //For alert message
   useEffect(() => {
     if (toastMessage) {
       toast({
@@ -65,9 +58,10 @@ const ImageItem = ({ images }) => {
     }
   }, [toastMessage, toast]);
 
+  //Add favorite
   const handleAddFavorite = (event) => {
     event.preventDefault();
-    let title;
+
     let description;
     let duration;
 
@@ -96,7 +90,7 @@ const ImageItem = ({ images }) => {
       object_end_date,
     };
 
-    console.log("body", body);
+    // console.log("body", body);
 
     fetch("/favorites/addFavorite", {
       method: "POST",
@@ -109,25 +103,22 @@ const ImageItem = ({ images }) => {
       .then((res) => res.text())
       .then((data) => {
         if (data === "Favorite Saved") {
-          
           description = `${data}`;
           duration = 9000;
           status = "success";
           setToastMessage({ description, duration, status });
         } else {
-          
-          description = "Please login"
+          description = "Please login";
           duration = 9000;
           status = "warning";
           setToastMessage({ description, duration, status });
         }
       })
       .catch((error) => {
-    
-        description = "Favorite not saved"
+        description = "Favorite not saved";
         duration = 9000;
         status = "error";
-        setToastMessage({  description, duration, status });
+        setToastMessage({ description, duration, status });
       });
   };
 
@@ -195,7 +186,6 @@ const ImageItem = ({ images }) => {
               color: "black",
               fontSize: "15px",
             }}
-        
           />
         </Flex>
         <Text

@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Stack,
-  Spacer,
-  VStack,
-  HStack,
   Text,
-  Button,
   IconButton,
-  useColorMode,
   Image,
   useToast,
   Flex,
   Square,
-  Center,
 } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { CloseIcon, ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
@@ -24,9 +17,8 @@ const fadeIn = keyframes`
   100% { opacity:1; }
   `;
 
-const ImageItem = ({ images, setImages, toggle, setToggle }) => {
+const ImageItem = ({ images, setToggle }) => {
   const [value, setValue] = useState(0);
-  const { colorMode, toggleColorMode } = useColorMode();
 
   const toast = useToast();
 
@@ -49,6 +41,7 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
   }, [value]);
   const [toastMessage, setToastMessage] = useState(undefined);
 
+  //For alert message
   useEffect(() => {
     if (toastMessage) {
       toast({
@@ -62,9 +55,9 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
     }
   }, [toastMessage, toast]);
 
+  //Delete favorite
   const handleDeleteFavorite = (event) => {
     event.preventDefault();
-    let title;
     let description;
     let duration;
     let image_id = images[value].image_id;
@@ -264,7 +257,3 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
 };
 
 export default ImageItem;
-
-{
-  /* <IconButton id={`${images[value].image_id}`} onClick={handleDeleteFavorite} aria-label="favorite" icon={<CloseIcon />} /> */
-}

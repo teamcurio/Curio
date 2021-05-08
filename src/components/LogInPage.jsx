@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import {
-  FormHelperText,
   FormControl,
   FormLabel,
   Button,
@@ -12,32 +11,31 @@ import {
   LightMode,
   Flex,
   useToast,
-  Spacer
-} from '@chakra-ui/react';
-import NavBar from './NavBar';
-
+} from "@chakra-ui/react";
+import NavBar from "./NavBar";
 
 const LogIn = () => {
-  // this sets the current state using the useState hook;
+  // This sets the current state using the useState hook;
   const [currentUser, setCurrentUserField] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  // this sets the toast parts according to errors/actions
+  // This sets the toast parts according to errors/actions
   const [toastMessage, setToastMessage] = useState(undefined);
 
   const toast = useToast();
   const history = useHistory();
 
+  //For alert message
   useEffect(() => {
     if (toastMessage) {
       toast({
         title: toastMessage.title,
         description: toastMessage.description,
-        status: 'warning',
+        status: "warning",
         duration: toastMessage.duration,
         isClosable: true,
-        position: 'top',
+        position: "top",
       });
     }
   }, [toastMessage, toast]);
@@ -54,25 +52,23 @@ const LogIn = () => {
     let title;
     let description;
     let duration;
-    console.log('currentUser', currentUser);
-    fetch('/auth/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    // console.log("currentUser", currentUser);
+    fetch("/auth/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(currentUser),
     })
       .then((res) => {
-
         return res.json();
       })
       .then((data) => {
-        console.log('data', data);
-        localStorage.setItem('curioToken', data.token);
-        localStorage.setItem('curioUser', data.user);
-        history.push('/')
-          ;
+        // console.log("data", data);
+        localStorage.setItem("curioToken", data.token);
+        localStorage.setItem("curioUser", data.user);
+        history.push("/");
       })
       .catch((error) => {
-        title = 'error';
+        title = "error";
         description = `${error.err}`;
         duration = 9000;
         // n;
@@ -84,20 +80,28 @@ const LogIn = () => {
     <>
       <LightMode>
         <NavBar displaySearch={false} />
-        <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)' bgPosition="center">
+        <Flex
+          justifyContent="center"
+          h="100vh"
+          backgroundImage="url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)"
+          bgPosition="center"
+        >
           <Box>
             <Container
               border="2px solid black"
-              margin='auto'
+              margin="auto"
               mt="100px"
               mb="100px"
               maxW="300px"
               py="20px"
               borderRadius="3"
-              bg='whitesmoke'
+              bg="whitesmoke"
               boxShadow="dark-lg"
             >
-              <Container marginBottom="1px solid silver" justifyContent="column">
+              <Container
+                marginBottom="1px solid silver"
+                justifyContent="column"
+              >
                 <form onSubmit={handleUserSubmit}>
                   <FormControl isRequired>
                     <FormLabel>Email:</FormLabel>
@@ -105,10 +109,9 @@ const LogIn = () => {
                       id="email"
                       onChange={handleInputChange}
                       name="email"
-                      borderColor='black'
-                      color='black'
+                      borderColor="black"
+                      color="black"
                     />
-                 
                   </FormControl>
                   <FormControl isRequired mt="10px">
                     <FormLabel>Password:</FormLabel>
@@ -117,29 +120,30 @@ const LogIn = () => {
                       onChange={handleInputChange}
                       type="password"
                       name="password"
-                      borderColor='black'
-                      color='black'
+                      borderColor="black"
+                      color="black"
                     />
-               
                   </FormControl>
                   <Flex>
                     <Button
                       ml="auto"
-                      mr='auto'
+                      mr="auto"
                       mt={4}
-                      background='#ebc765'
+                      background="#ebc765"
                       color="black"
                       type="submit"
-                      _hover={{ color: 'white', background: "black" }}
+                      _hover={{ color: "white", background: "black" }}
                     >
                       Log In
-              </Button>
+                    </Button>
                   </Flex>
                 </form>
               </Container>
               <Container>
                 <Flex mt="15px" justifyContent="center">
-                  <Text fontSize="12px" mr="5px">Don't have an account?</Text>
+                  <Text fontSize="12px" mr="5px">
+                    Don't have an account?
+                  </Text>
                   <NavLink to="/signup">
                     <Text fontSize="12px" textDecoration="underline">
                       Sign Up
