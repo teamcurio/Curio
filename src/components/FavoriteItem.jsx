@@ -37,6 +37,9 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
   const decrementItem = () => {
     value === 0 ? setValue(images.length - 1) : setValue(value - 1);
   };
+  // const valueOnDelete = () => {
+  //   value === images.length -1 ? setValue(value - 1) : value
+  // }
 
   // SetInterval to move through array of images at a set timer
   useEffect(() => {
@@ -54,7 +57,7 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
       toast({
         title: toastMessage.title,
         description: toastMessage.description,
-        status: "warning",
+        status: toastMessage.status,
         duration: toastMessage.duration,
         isClosable: true,
         position: "bottom-left",
@@ -88,7 +91,10 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
         title = 'Success';
         description = `${data}`;
         duration = 9000;
-        setToastMessage({ title, description, duration });
+        status= 'success'
+        setToastMessage({ title, description, duration , status});
+//        valueOnDelete();
+        setValue(0);
         // setImages(images.filter(item => item.image_id !== images[value].image_id))
         setToggle(true);
       })
@@ -96,7 +102,8 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
         title = 'error';
         description = `${error.err}`;
         duration = 9000;
-        setToastMessage({ title, description, duration });
+        status= 'error'
+        setToastMessage({ title, description, duration , status});
       });
   };
 
