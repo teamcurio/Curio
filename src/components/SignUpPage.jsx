@@ -106,10 +106,10 @@ const SignUp = () => {
   return (
     <LightMode>
       <NavBar displaySearch={false} />
-      <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
+      <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)' bgPosition="center">
         <Box>
           <Container
-            border="3px solid black"
+            border="2px solid black"
             margin="auto"
             mb="50px"
             mt="100px"
@@ -117,6 +117,7 @@ const SignUp = () => {
             py="20px"
             rounded="5%"
             bg='whitesmoke'
+            boxShadow="dark-lg"
           >
             <Container marginBottom="1px solid silver" justifyContent="column">
               <form onSubmit={handleNewUserSubmit}>
@@ -129,9 +130,7 @@ const SignUp = () => {
                     borderColor='black'
                     color='black'
                   />
-                  <FormHelperText fontSize="12px" id="email-helper-text">
-                    Your user account email address
-                </FormHelperText>
+              
                 </FormControl>
                 <FormControl mt="10px" isRequired>
                   <FormLabel>Password:</FormLabel>
@@ -148,9 +147,7 @@ const SignUp = () => {
                       {error.verifyPassword}
                     </Text>
                   )}
-                  <FormHelperText fontSize="12px" id="password-helper-text">
-                    Set up a password
-                </FormHelperText>
+            
                 </FormControl>
                 <FormControl mt="10px" isRequired>
                   <FormLabel>Confirm Password:</FormLabel>
@@ -167,9 +164,7 @@ const SignUp = () => {
                       {error.verifyPassword}
                     </Text>
                   )}
-                  <FormHelperText fontSize="12px" id="password-helper-text">
-                    Set up a password
-                </FormHelperText>
+                 
                 </FormControl>
                 <Flex>
                   <Button
@@ -188,8 +183,8 @@ const SignUp = () => {
             </Container>
             <Container>
               {/* <Flex ml="30px" maxW="180px" justifyContent="space-between"> */}
-              <Flex justifyContent='space-evenly' padding={5}>
-                <Text fontSize='12px'>Have an account?</Text>
+              <Flex mt="15px" justifyContent="center">
+                <Text fontSize='12px' mr="5px">Have an account?</Text>
                 <NavLink to="/login">
                   <Text fontSize="12px" textDecoration='underline'>
                     Log In

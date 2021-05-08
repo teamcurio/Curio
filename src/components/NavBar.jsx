@@ -60,14 +60,14 @@ const NavBar = (props) => {
       <Spacer />
       {props.displaySearch &&
         <Stack direction={['column', 'row']}>
-          <Input _placeholder={{ color: 'black' }}
+          <Input type="text" _placeholder={{ color: 'black' }}
             align='center'
             pr="4.5rem"
             name="search"
             borderColor='white'
             bg='white'
             color='black'
-            placeholder='Enter Search Term'
+            placeholder='Search'
             onChange={handleSearchTerm}
             size='xs'
             mt='5px'

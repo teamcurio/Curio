@@ -129,9 +129,12 @@ const ImageItem = ({ images }) => {
             <Box flex="1" align="right" >
               <IconButton
                 aria-label="favorite"
-                icon={<ArrowBackIcon style={{ color: "black" }} />}
+                icon={<ArrowBackIcon style={{ fontSize:"25px" }} />}
                 onClick={decrementItem}
                 boxSize="60px"
+                bg='#ebc765'
+                color="black"
+                _hover={{ background:"black" , color:"white"}}
               />
             </Box>
           </Square>
@@ -141,16 +144,19 @@ const ImageItem = ({ images }) => {
               alt={images[value].title}
               boxSize="70vh"
               size="500px"
-              // width="60vw"
+              
             />
           </Box>
           <Square size="30vw" style={{ height: "60vh", paddingLeft: "20px" }}>
             <Box flex="1" align="left" >
               <IconButton
                 aria-label="favorite"
-                icon={<ArrowForwardIcon style={{ color: "black" }} />}
+                icon={<ArrowForwardIcon style={{ fontSize:"25px" }}/>}
                 onClick={incrementItem}
                 boxSize="60px"
+                bg='#ebc765'
+                color="black"
+                _hover={{ background:"black" , color:"white"}}
               />
             </Box>
           </Square>

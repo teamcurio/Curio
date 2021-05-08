@@ -84,10 +84,10 @@ const LogIn = () => {
     <>
       <LightMode>
         <NavBar displaySearch={false} />
-        <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
+        <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)' bgPosition="center">
           <Box>
             <Container
-              border="3px solid black"
+              border="2px solid black"
               margin='auto'
               mt="100px"
               mb="100px"
@@ -95,6 +95,7 @@ const LogIn = () => {
               py="20px"
               rounded="5%"
               bg='whitesmoke'
+              boxShadow="dark-lg"
             >
               <Container marginBottom="1px solid silver" justifyContent="column">
                 <form onSubmit={handleUserSubmit}>
@@ -107,9 +108,7 @@ const LogIn = () => {
                       borderColor='black'
                       color='black'
                     />
-                    <FormHelperText fontSize="12px" id="email-helper-text">
-                      Your email
-                </FormHelperText>
+                 
                   </FormControl>
                   <FormControl isRequired mt="10px">
                     <FormLabel>Password:</FormLabel>
@@ -121,9 +120,7 @@ const LogIn = () => {
                       borderColor='black'
                       color='black'
                     />
-                    <FormHelperText fontSize="12px" id="password-helper-text">
-                      The password you used to signup with
-                </FormHelperText>
+               
                   </FormControl>
                   <Flex>
                     <Button
@@ -141,8 +138,8 @@ const LogIn = () => {
                 </form>
               </Container>
               <Container>
-                <Flex justifyContent="space-evenly" padding={3}>
-                  <Text fontSize="12px">Don't have an account?</Text>
+                <Flex mt="15px" justifyContent="center">
+                  <Text fontSize="12px" mr="5px">Don't have an account?</Text>
                   <NavLink to="/signup">
                     <Text fontSize="12px" textDecoration="underline">
                       Sign Up
