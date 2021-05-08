@@ -46,10 +46,10 @@ const Images = () => {
                     ({ loading, error, data }) => {
                         if (loading) return <h4>Loading...</h4>
                         if (error) console.log(error)
-                        console.log(data.Images.objectIDs)
+                        console.log(data.images.objectIDs)
                         return <>
                             {
-                                data.Images.objectIDs.map(imageID => (
+                                data.images.objectIDs.map(imageID => (
                                     <ImageItem key={imageID} imageID={imageID}/>
                                    
                                 ))

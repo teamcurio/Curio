@@ -60,7 +60,7 @@ const ImageContainer = (props) => {
             if (error) console.log(error);
             return (
               <>
-                <ImageItem images={data.Images.info} />
+                <ImageItem images={data.images.info} />
               </>
             );
           }}

@@ -10,7 +10,7 @@ describe('Cypress', () => {
   });
 
   it('Checks Input', () => {
-    cy.get('input[placeholder="Enter Search Term"]').type('h1');
+    cy.get('input[placeholder="Enter Search Term"]');
   }) 
 
   it('Search redirects to /images', () => {
