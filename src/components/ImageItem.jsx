@@ -14,7 +14,6 @@ import {
   Flex,
   Square,
   Center,
-
 } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { StarIcon, ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
@@ -82,39 +81,45 @@ const ImageItem = ({ images }) => {
     let image_id = images[value].objectID;
     let artist_begin_date = images[value].artistBeginDate || null;
     let artist_end_date = images[value].artistEndDate || null;
-    let token = localStorage.getItem('curioToken');
+    let token = localStorage.getItem("curioToken");
 
     const body = {
-      image_id, primary_image, image_title, artist_display_name,
-      artist_nationality, artist_begin_date, artist_end_date, object_name,
-      object_begin_date, object_end_date
-    }
+      image_id,
+      primary_image,
+      image_title,
+      artist_display_name,
+      artist_nationality,
+      artist_begin_date,
+      artist_end_date,
+      object_name,
+      object_begin_date,
+      object_end_date,
+    };
 
-    console.log('body', body);
+    console.log("body", body);
 
-    fetch('/favorites/addFavorite', {
-      method: 'POST',
+    fetch("/favorites/addFavorite", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'authorization': `${token}`,
+        "Content-Type": "application/json",
+        authorization: `${token}`,
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     })
       .then((res) => res.text())
       .then((data) => {
-        title = 'Success';
+        title = "Success";
         description = `${data}`;
         duration = 9000;
         setToastMessage({ title, description, duration });
       })
       .catch((error) => {
-        title = 'error';
+        title = "error";
         description = `${error.err}`;
         duration = 9000;
         setToastMessage({ title, description, duration });
       });
   };
-
 
   return (
     <>
@@ -125,75 +130,143 @@ const ImageItem = ({ images }) => {
       {/* </div> */}
       <div style={{ height: "70vh", marginTop: "20px" }}>
         <Flex color="white">
-        <Square size="30vw" style={{ height: "60vh", paddingRight: "20px" }}>
-            <Box flex="1" align="right" >
+          <Square size="30vw" style={{ height: "60vh", paddingRight: "20px" }}>
+            <Box flex="1" align="right">
               <IconButton
                 aria-label="favorite"
-                icon={<ArrowBackIcon style={{ fontSize:"25px" }} />}
+                icon={<ArrowBackIcon style={{ fontSize: "25px" }} />}
                 onClick={decrementItem}
                 boxSize="60px"
-                bg='#ebc765'
+                bg="#ebc765"
                 color="black"
-                _hover={{ background:"black" , color:"white"}}
+                _hover={{ background: "black", color: "white" }}
               />
             </Box>
           </Square>
-          <Box flex="1" align="center" size="40vw" >
+          <Box flex="1" align="center" size="40vw">
             <Image
               src={images[value].primaryImage}
               alt={images[value].title}
               boxSize="70vh"
               size="500px"
-              
+              border="3px solid black"
+              borderRadius="3"
+              boxShadow="lg"
             />
           </Box>
           <Square size="30vw" style={{ height: "60vh", paddingLeft: "20px" }}>
-            <Box flex="1" align="left" >
+            <Box flex="1" align="left">
               <IconButton
                 aria-label="favorite"
-                icon={<ArrowForwardIcon style={{ fontSize:"25px" }}/>}
+                icon={<ArrowForwardIcon style={{ fontSize: "25px" }} />}
                 onClick={incrementItem}
                 boxSize="60px"
-                bg='#ebc765'
+                bg="#ebc765"
                 color="black"
-                _hover={{ background:"black" , color:"white"}}
+                _hover={{ background: "black", color: "white" }}
               />
             </Box>
           </Square>
         </Flex>
       </div>
-      <div style={{ marginTop: "40px" }}>
-        <Box
-          backgroundColor="white"
-          border="1px solid black"
-          backgroundSize="cover"
-          width="30vw"
-          height="15vh"
-          ml="auto"
-          mr="auto"
-          boxShadow="dark-lg" p="6" rounded="md"
-        >
-          <VStack>
-            <Text align="center">{images[value].artistDisplayName} </Text>
-            {images[value].artistNationality && images[value].artistBeginDate && images[value].artistEndDate && (<Text align="center">{images[value].artistNationality}, {images[value].artistBeginDate} - {images[value].artistEndDate} </Text>)}
 
-            <Text align="center" mt="40px" color="black">
-              {images[value].objectName}
+      <Box
+        backgroundColor="white"
+        width="30vw"
+        height="15vh"
+        ml="auto"
+        mr="auto"
+        border="3px solid #ebc765"
+        borderRadius="3"
+        boxShadow="lg"
+        mt="15px"
+      >
+        <Text
+          align="center"
+          mt="7px"
+          color="black"
+          style={{ fontWeight: "bold", fontSize: "18px" }}
+        >
+          {images[value].objectName}
+        </Text>
+        {images[value].artistDisplayName && (
+          <Text align="center" style={{ fontSize: "15px" }}>
+            <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+              Artist:
+            </span>{" "}
+            {images[value].artistDisplayName}{" "}
+          </Text>
+        )}
+        {images[value].artistNationality &&
+          images[value].artistBeginDate &&
+          images[value].artistEndDate && (
+            <Text align="center" style={{ fontSize: "15px" }}>
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                Artist Nationality:{" "}
+              </span>
+              {images[value].artistNationality} |{" "}
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                Artist Date:{" "}
+              </span>
+              {images[value].artistBeginDate} - {images[value].artistEndDate}{" "}
             </Text>
-            <Text align="center">c. {images[value].objectBeginDate} - {images[value].objectEndDate}</Text>
-          </VStack>
-          <HStack justifyContent="space-between">
-            {/* <Button align="left" onClick={toggleColorMode}>
-              Toggle {colorMode === "light" ? "Dark" : "Light"}
-            </Button> */}
-            <IconButton id={`${images[value].objectID}`} onClick={(event) => handleAddFavorite(event)} aria-label="favorite" icon={<StarIcon />} />
-          </HStack>
-        </Box>
-      </div>
+          )}
+
+        <Flex justifyContent="center">
+          <Text align="center" style={{ fontSize: "15px" }}>
+            <span style={{ fontWeight: "bold", fontSize: "13px" }}>Date: </span>
+            c. {images[value].objectBeginDate} - {images[value].objectEndDate}{" "}
+          </Text>{" "}
+          {images[value].period && (
+            <Text
+              align="center"
+              style={{ fontSize: "15px", paddingLeft: "5px" }}
+            >
+              |{" "}
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                Period:{" "}
+              </span>
+              {images[value].period}
+            </Text>
+          )}
+        </Flex>
+
+        <Flex justifyContent="center">
+          <Text align="center" style={{ fontSize: "15px" }}>
+            <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+              Department:{" "}
+            </span>
+            {images[value].department}
+          </Text>
+          {images[value].culture && (
+            <Text
+              align="center"
+              style={{ fontSize: "15px", paddingLeft: "5px" }}
+            >
+              |
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                {" "}
+                Culture:{" "}
+              </span>
+              {images[value].culture}
+            </Text>
+          )}
+        </Flex>
+      </Box>
     </>
   );
 };
 
 export default ImageItem;
 
-
+//  {/* <HStack justifyContent="space-between">
+//             {/* <Button align="left" onClick={toggleColorMode}>
+//               Toggle {colorMode === "light" ? "Dark" : "Light"}
+//             </Button> */}
+//             <IconButton
+//               id={`${images[value].objectID}`}
+//               onClick={(event) => handleAddFavorite(event)}
+//               aria-label="favorite"
+//               icon={<StarIcon />}
+//             />
+//           </HStack> */}
