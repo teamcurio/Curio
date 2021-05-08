@@ -8,6 +8,7 @@
     "start": "cross-env NODE_ENV=production webpack serve --no-cache",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development webpack serve & nodemon server/server.js",
+    "client-server": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"npm run start\"",
     "cypress": "cypress open"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "apollo-boost": "^0.4.9",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
+    "concurrently": "^6.0.2",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "cypress": "^7.2.0",

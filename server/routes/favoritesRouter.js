@@ -21,7 +21,7 @@ router.post(
   authController.verifyJWT,
   favoritesController.addFavorite,
   (req, res) => {
-    res.status(200).send("Favorite Saved");
+    res.status(200).json("Favorite Saved");
   }
 );
 

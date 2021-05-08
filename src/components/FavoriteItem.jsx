@@ -13,11 +13,10 @@ import {
   useToast,
   Flex,
   Square,
-  Center,
-
+  Center
 } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
-import { StarIcon, ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
+import { CloseIcon, ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
 
 //Styling:
 const fadeIn = keyframes`
@@ -25,14 +24,11 @@ const fadeIn = keyframes`
   100% { opacity:1; }
   `;
 
-const ImageItem = ({ images }) => {
+const ImageItem = ({ images, setImages, toggle, setToggle }) => {
   const [value, setValue] = useState(0);
   const { colorMode, toggleColorMode } = useColorMode();
 
   const toast = useToast();
-
-  //Filter out only images that can be shown publicly
-  images = images.filter((image) => image.isPublicDomain === true);
 
   //Handle function to move images carousel forwards and backwards
   const incrementItem = () => {
@@ -41,6 +37,9 @@ const ImageItem = ({ images }) => {
   const decrementItem = () => {
     value === 0 ? setValue(images.length - 1) : setValue(value - 1);
   };
+  // const valueOnDelete = () => {
+  //   value === images.length -1 ? setValue(value - 1) : value
+  // }
 
   // SetInterval to move through array of images at a set timer
   useEffect(() => {
@@ -66,34 +65,21 @@ const ImageItem = ({ images }) => {
     }
   }, [toastMessage, toast]);
 
-  const handleAddFavorite = (event) => {
+  const handleDeleteFavorite = (event) => {
     event.preventDefault();
     let title;
     let description;
     let duration;
+    let image_id = images[value].image_id;
 
-    let primary_image = images[value].primaryImage;
-    let image_title = images[value].title || null;
-    let artist_display_name = images[value].artistDisplayName || null;
-    let artist_nationality = images[value].artistNationality || null;
-    let object_name = images[value].objectName || null;
-    let object_begin_date = images[value].objectBeginDate || null;
-    let object_end_date = images[value].objectEndDate || null;
-    let image_id = images[value].objectID;
-    let artist_begin_date = images[value].artistBeginDate || null;
-    let artist_end_date = images[value].artistEndDate || null;
     let token = localStorage.getItem('curioToken');
 
     const body = {
-      image_id, primary_image, image_title, artist_display_name,
-      artist_nationality, artist_begin_date, artist_end_date, object_name,
-      object_begin_date, object_end_date
+      image_id
     }
 
-    console.log('body', body);
-
-    fetch('/favorites/addFavorite', {
-      method: 'POST',
+    fetch('/favorites/deleteFavorite', {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'authorization': `${token}`,
@@ -107,24 +93,23 @@ const ImageItem = ({ images }) => {
         duration = 9000;
         status= 'success'
         setToastMessage({ title, description, duration , status});
+//        valueOnDelete();
+        setValue(0);
+        // setImages(images.filter(item => item.image_id !== images[value].image_id))
+        setToggle(true);
       })
       .catch((error) => {
         title = 'error';
         description = `${error.err}`;
         duration = 9000;
         status= 'error'
-        setToastMessage({ title, description, duration, status });
+        setToastMessage({ title, description, duration , status});
       });
   };
 
 
   return (
     <>
-      {/* <div style={{ marginTop: "50px", marginBottom: "30px" }}> */}
-      {/* <Text align="center" mt="40px" color="black">
-          {images[value].objectName}
-        </Text> */}
-      {/* </div> */}
       <div style={{ height: "60vh" }}>
         <Flex color="white">
           <Square size="30vw" style={{ marginLeft: "0px", paddingLeft: "0px", height: "60vh", align: "right" }}>
@@ -139,8 +124,8 @@ const ImageItem = ({ images }) => {
           </Square>
           <Box flex="1" align="center" size="40vw">
             <Image
-              src={images[value].primaryImage}
-              alt={images[value].title}
+              src={images[value].primary_image}
+              alt={images[value].image_title}
               boxSize="60vh"
               size="475px"
             />
@@ -168,19 +153,18 @@ const ImageItem = ({ images }) => {
           mr="auto"
         >
           <VStack>
-            <Text align="center">{images[value].artistDisplayName} </Text>
-            {images[value].artistNationality && images[value].artistBeginDate && images[value].artistEndDate && (<Text align="center">{images[value].artistNationality}, {images[value].artistBeginDate} - {images[value].artistEndDate} </Text>)}
-
-            <Text align="center" mt="40px" color="black">
-              {images[value].objectName}
+            <Text align="center">{images[value].artist_display_name} </Text>
+            {images[value].artist_nationality && images[value].artist_begin_date && images[value].artist_end_date && (< Text align="center">{images[value].artist_nationality}, {images[value].artist_begin_date} - {images[value].artist_end_date} </Text>)}
+            < Text align="center" mt="40px" color="black">
+              {images[value].object_name}
             </Text>
-            <Text align="center">c. {images[value].objectBeginDate} - {images[value].objectEndDate}</Text>
+            <Text align="center">c. {images[value].object_begin_date} - {images[value].object_end_date}</Text>
           </VStack>
           <HStack justifyContent="space-between">
             {/* <Button align="left" onClick={toggleColorMode}>
               Toggle {colorMode === "light" ? "Dark" : "Light"}
             </Button> */}
-            <IconButton id={`${images[value].objectID}`} onClick={(event) => handleAddFavorite(event)} aria-label="favorite" icon={<StarIcon />} />
+            <IconButton id={`${images[value].image_id}`} onClick={handleDeleteFavorite} aria-label="favorite" icon={<CloseIcon />} />
           </HStack>
         </Box>
       </div>
@@ -189,5 +173,3 @@ const ImageItem = ({ images }) => {
 };
 
 export default ImageItem;
-
-

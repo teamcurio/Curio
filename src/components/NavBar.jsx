@@ -15,9 +15,10 @@ import {
   FormLabel,
   Grid,
   GridItem,
-  IconButton
+  IconButton,
+  Text
 } from "@chakra-ui/react";
-import {SearchIcon} from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons";
 
 
 
@@ -27,13 +28,13 @@ const NavBar = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearchTerm = (e) => setSearchTerm(e.target.value);
   const [isLoggedIn, setLogin] = useState(Boolean(localStorage.getItem('curioUser')))
-  
 
-  useEffect(()=> {
+
+  useEffect(() => {
     function handleLogStatus() {
       setLogin(Boolean(localStorage.getItem('curioUser')))
     }
-  },[isLoggedIn])
+  }, [isLoggedIn])
 
   const handleLogout = () => {
     localStorage.removeItem('curioUser');
@@ -44,55 +45,61 @@ const NavBar = (props) => {
     history.push('/');
   }
 
-console.log(localStorage.getItem('curioUser'))
+  console.log(localStorage.getItem('curioUser'))
   return (
-    <Flex justifyContent='center'>
-    
-   
-
-      <Spacer />
-      <Box position='fixed' width='100%' color='white' h='40px' bg='black' border='solid' borderBottomRadius='15px'>
-      {localStorage.getItem('curioUser') && (<Link to='/favorites'>
-      <Button float='left' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }}>
-        Favorites
-      </Button>
-      </Link>)}
-      
-      {props.displaySearch && 
-      <Box>
-      <form >
-              <InputGroup className='searchTerm' size="md" pr="4.5rem">
-                <Input _placeholder={{ color: 'black' }}
-                  pr="4.5rem"
-                  name="search"
-                  borderColor='black'
-                  color='black'
-                  placeholder='Enter Search Term'
-                  onChange={handleSearchTerm}
-                />
-                <InputRightElement width="4.5rem">
-                  <Link to={{pathname: "/images", state: {searchTerm}}} >
-                    <IconButton type='submit' aria-label="search" icon={<SearchIcon />} />
-                  </Link>
-                </InputRightElement>
-              </InputGroup>
-            </form>
-            </Box>} 
-        {!isLoggedIn ? (
-        <Link to="/login">
-          <Button float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }} >
-            Log In
+    <Flex width='100%' color='white' h='40px' bg='black' border='solid' borderBottomRadius='15px' justifyContent='center' style={{ marginTop: "0px" }}>
+      {localStorage.getItem('curioUser') ? (<Link to='/favorites'>
+        <Button float='left' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ color: '#ebc765' }}>
+          Favorites
         </Button>
-        </Link>) : 
-        (  
-        <Link to="/">
-        <Button onClick={()=>handleLogout()} float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ background: 'lightgray', color: 'black' }} >
-          Sign Out
-      </Button>
-      </Link>)}
-      </Box>
+      </Link>) : <Link to='/'><Button float='left' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ color: '#ebc765' }}>
+        {''}Curio
+        </Button>
+        </Link>}
+      <Spacer />
+      <Spacer />
+      {props.displaySearch &&
+        // 
+          <form>
+          <InputGroup className='inputTerm' pr="3.5rem">
+          <Stack direction={['column','row']}>
+            <Input _placeholder={{ color: 'black' }}
+            align='center'
+            pr="4rem"
+            name="search"
+            borderColor='white'
+            bg='white'
+            color='black'
+            placeholder='Enter Search Term'
+            onChange={handleSearchTerm}
+            size='xs'
+            mt='5px'
+          />
+          <InputRightElement width="4.5rem">
+          <Link to={{ pathname: "/images", state: { searchTerm } }} >
+            <IconButton size='xs' colorScheme='blackAlpha' type='submit' aria-label="search" icon={<SearchIcon />} />
+          </Link>
+          </InputRightElement>
+          </Stack>
+          </InputGroup>
+          </form>
+        // 
+      }
+      <Spacer></Spacer>
+      <Spacer></Spacer>
+      {!isLoggedIn ? (
+        <Link to="/login">
+          <Button float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ color: '#ebc765' }} >
+            Log In
+          </Button>
+        </Link>) :
+        (
+          <Link to="/">
+            <Button onClick={() => handleLogout()} float='right' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ color: '#ebc765' }} >
+              Sign Out
+        </Button>
+          </Link>)}
     </Flex>
-
   );
 };
 
