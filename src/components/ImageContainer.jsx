@@ -5,36 +5,36 @@ import { Query } from "react-apollo";
 import ImageItem from "./ImageItem";
 import NavBar from "./NavBar";
 
-//SINGLE IMAGE
+//SINGLE IMAGE **Not in Use**
 const IMAGE_QUERY = gql`
   query ImageQuery($objectID: Int!) {
     Image(objectID: $objectID) {
       objectID
-        accessionYear
-        isPublicDomain
-        primaryImage
-        department
-        objectName
-        title
-        culture
-        period
-        artistDisplayName
-        artistDisplayBio
-        artistNationality
-        objectDate
-        objectBeginDate
-        objectEndDate
-        objectUrl
-        constituents {
-          constituentID
-          name
-        }
-        tags {
-          term
-        }
+      accessionYear
+      isPublicDomain
+      primaryImage
+      department
+      objectName
+      title
+      culture
+      period
+      artistDisplayName
+      artistDisplayBio
+      artistNationality
+      objectDate
+      objectBeginDate
+      objectEndDate
+      objectUrl
+      constituents {
+        constituentID
+        name
+      }
+      tags {
+        term
+      }
     }
   }
-`
+`;
 //GraphQl query string:
 const IMAGES_QUERY = gql`
   query ImagesQuery($searchTerm: String!) {
@@ -91,7 +91,7 @@ const ImageContainer = (props) => {
             if (error) console.log(error);
             return (
               <>
-                <ImageItem images={data.Images.info} /> 
+                <ImageItem images={data.Images.info} />
               </>
             );
           }}
