@@ -86,28 +86,25 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
       .then((res) => res.text())
       .then((data) => {
         if (data === "Favorite Deleted") {
-          title = "Success";
           description = `${data}`;
           duration = 9000;
           status = "success";
-          setToastMessage({ title, description, duration, status });
+          setToastMessage({ description, duration, status });
           setValue(0);
           // setImages(images.filter(item => item.image_id !== images[value].image_id))
           setToggle(true);
         } else {
-          title = "error";
-          description = `${data}`;
+          description = "Please re-login";
           duration = 9000;
-          status = "error";
-          setToastMessage({ title, description, duration, status });
+          status = "warning";
+          setToastMessage({ description, duration, status });
         }
       })
       .catch((error) => {
-        title = "error";
         description = `${error.err}`;
         duration = 9000;
         status = "error";
-        setToastMessage({ title, description, duration, status });
+        setToastMessage({ description, duration, status });
       });
   };
 

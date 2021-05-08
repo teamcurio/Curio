@@ -109,25 +109,25 @@ const ImageItem = ({ images }) => {
       .then((res) => res.text())
       .then((data) => {
         if (data === "Favorite Saved") {
-          title = "Success";
+          
           description = `${data}`;
           duration = 9000;
           status = "success";
-          setToastMessage({ title, description, duration, status });
+          setToastMessage({ description, duration, status });
         } else {
-          title = "error";
-          description = `${data}`
+          
+          description = "Please login"
           duration = 9000;
-          status = "error";
-          setToastMessage({ title, description, duration, status });
+          status = "warning";
+          setToastMessage({ description, duration, status });
         }
       })
       .catch((error) => {
-        title = "error";
+    
         description = "Favorite not saved"
         duration = 9000;
         status = "error";
-        setToastMessage({ title, description, duration, status });
+        setToastMessage({  description, duration, status });
       });
   };
 
@@ -192,9 +192,10 @@ const ImageItem = ({ images }) => {
             style={{
               position: "absolute",
               margin: "7px",
-              color: "#ebc765",
+              color: "black",
               fontSize: "15px",
             }}
+        
           />
         </Flex>
         <Text
