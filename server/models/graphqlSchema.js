@@ -92,7 +92,11 @@ const RootQuery = new GraphQLObjectType({
           .get(
             `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${args.searchTerm}`
           )
-          .then((response) => response.data);
+          .then((response) => {
+            let shortList = response.data;
+            shortList.objectIDs = shortList.objectIDs.slice(0, 50);
+            return shortList;
+          });
       },
     },
     Image: {
