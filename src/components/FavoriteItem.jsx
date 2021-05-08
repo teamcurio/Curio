@@ -13,7 +13,7 @@ import {
   useToast,
   Flex,
   Square,
-  Center
+  Center,
 } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { CloseIcon, ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
@@ -69,187 +69,205 @@ const ImageItem = ({ images, setImages, toggle, setToggle }) => {
     let duration;
     let image_id = images[value].image_id;
 
-    let token = localStorage.getItem('curioToken');
+    let token = localStorage.getItem("curioToken");
 
     const body = {
-      image_id
-    }
+      image_id,
+    };
 
-    fetch('/favorites/deleteFavorite', {
-      method: 'DELETE',
+    fetch("/favorites/deleteFavorite", {
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'authorization': `${token}`,
+        "Content-Type": "application/json",
+        authorization: `${token}`,
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     })
       .then((res) => res.text())
       .then((data) => {
-        title = 'Success';
-        description = `${data}`;
-        duration = 9000;
-        status= "success"
-        setToastMessage({ title, description, duration , status});
-        setValue(0)
-        // setImages(images.filter(item => item.image_id !== images[value].image_id))
-        setToggle(true);
+        if (data === "Favorite Deleted") {
+          title = "Success";
+          description = `${data}`;
+          duration = 9000;
+          status = "success";
+          setToastMessage({ title, description, duration, status });
+          setValue(0);
+          // setImages(images.filter(item => item.image_id !== images[value].image_id))
+          setToggle(true);
+        } else {
+          title = "error";
+          description = `${data}`;
+          duration = 9000;
+          status = "error";
+          setToastMessage({ title, description, duration, status });
+        }
       })
       .catch((error) => {
-        title = 'error';
+        title = "error";
         description = `${error.err}`;
         duration = 9000;
-        status= "error"
-        setToastMessage({ title, description, duration , status});
+        status = "error";
+        setToastMessage({ title, description, duration, status });
       });
   };
 
-
   return (
     <>
-    <div style={{ height: "70vh", marginTop: "20px" }}>
-      <Flex color="white">
-        <Square size="30vw" style={{ height: "60vh", paddingRight: "20px" }}>
-          <Box flex="1" align="right">
-            <IconButton
-              aria-label="favorite"
-              icon={<ArrowBackIcon style={{ fontSize: "25px" }} />}
-              onClick={decrementItem}
-              boxSize="60px"
-              bg="#ebc765"
-              color="black"
-              _hover={{ background: "black", color: "white" }}
+      <div style={{ height: "70vh", marginTop: "20px" }}>
+        <Flex color="white">
+          <Square size="30vw" style={{ height: "60vh", paddingRight: "20px" }}>
+            <Box flex="1" align="right">
+              <IconButton
+                aria-label="favorite"
+                icon={<ArrowBackIcon style={{ fontSize: "25px" }} />}
+                onClick={decrementItem}
+                boxSize="60px"
+                bg="#ebc765"
+                color="black"
+                _hover={{ background: "black", color: "white" }}
+              />
+            </Box>
+          </Square>
+          <Box flex="1" align="center" size="40vw">
+            <Image
+              src={images[value].primary_image}
+              alt={images[value].title}
+              boxSize="70vh"
+              size="500px"
+              border="3px solid black"
+              borderRadius="3"
+              boxShadow="lg"
             />
           </Box>
-        </Square>
-        <Box flex="1" align="center" size="40vw">
-          <Image
-            src={images[value].primary_image}
-            alt={images[value].title}
-            boxSize="70vh"
-            size="500px"
-            border="3px solid black"
-            borderRadius="3"
-            boxShadow="lg"
-          />
-        </Box>
-        <Square size="30vw" style={{ height: "60vh", paddingLeft: "20px" }}>
-          <Box flex="1" align="left">
-            <IconButton
-              aria-label="favorite"
-              icon={<ArrowForwardIcon style={{ fontSize: "25px" }} />}
-              onClick={incrementItem}
-              boxSize="60px"
-              bg="#ebc765"
-              color="black"
-              _hover={{ background: "black", color: "white" }}
-            />
-          </Box>
-        </Square>
-      </Flex>
-    </div>
+          <Square size="30vw" style={{ height: "60vh", paddingLeft: "20px" }}>
+            <Box flex="1" align="left">
+              <IconButton
+                aria-label="favorite"
+                icon={<ArrowForwardIcon style={{ fontSize: "25px" }} />}
+                onClick={incrementItem}
+                boxSize="60px"
+                bg="#ebc765"
+                color="black"
+                _hover={{ background: "black", color: "white" }}
+              />
+            </Box>
+          </Square>
+        </Flex>
+      </div>
 
-    <Box
-      backgroundColor="white"
-      width="33vw"
-      height="18vh"
-      ml="auto"
-      mr="auto"
-      border="3px solid #ebc765"
-      borderRadius="3"
-      boxShadow="lg"
-      mt="15px"
-    >
-      <Flex >
-        <CloseIcon
-          onClick={handleDeleteFavorite}
-          style={{ position: "absolute", margin:"7px", color:"#ebc765", fontSize:"15px"}}
-        />
-      </Flex>
-      <Text
-        align="center"
-        mt="7px"
-        mr="10px"
-        ml="18px"
-        color="black"
-        style={{ fontWeight: "bold", fontSize: "15px" }}
+      <Box
+        backgroundColor="white"
+        width="33vw"
+        height="18vh"
+        ml="auto"
+        mr="auto"
+        border="3px solid #ebc765"
+        borderRadius="3"
+        boxShadow="lg"
+        mt="15px"
       >
-        {images[value].image_title}
-      </Text>
-      <Text
-        align="center"
-        color=" #ebc765"
-        style={{ fontWeight: "bold", fontSize: "12px" }}
-      >
-        {images[value].object_name}
-      </Text>
-      {images[value].artist_display_name && (
-        <Text align="center" style={{ fontSize: "15px" }}>
-          <span style={{ fontWeight: "bold", fontSize: "13px" }}>
-            Artist:
-          </span>{" "}
-          {images[value].artist_display_name}{" "}
+        <Flex>
+          <CloseIcon
+            onClick={handleDeleteFavorite}
+            style={{
+              position: "absolute",
+              margin: "7px",
+              color: "#ebc765",
+              fontSize: "15px",
+            }}
+          />
+        </Flex>
+        <Text
+          align="center"
+          mt="7px"
+          mr="10px"
+          ml="18px"
+          color="black"
+          style={{ fontWeight: "bold", fontSize: "15px" }}
+        >
+          {images[value].image_title}
         </Text>
-      )}
-      {images[value].artist_nationality &&
-        images[value].artist_beginD_date &&
-        images[value].artist_end_date && (
+        <Text
+          align="center"
+          color=" #ebc765"
+          style={{ fontWeight: "bold", fontSize: "12px" }}
+        >
+          {images[value].object_name}
+        </Text>
+        {images[value].artist_display_name && (
           <Text align="center" style={{ fontSize: "15px" }}>
             <span style={{ fontWeight: "bold", fontSize: "13px" }}>
-              Artist Nationality:{" "}
-            </span>
-            {images[value].artist_nationality} |{" "}
-            <span style={{ fontWeight: "bold", fontSize: "13px" }}>
-              Artist Date:{" "}
-            </span>
-            {images[value].artist_beginD_date} - {images[value].artist_end_date }{" "}
+              Artist:
+            </span>{" "}
+            {images[value].artist_display_name}{" "}
           </Text>
         )}
+        {images[value].artist_nationality &&
+          images[value].artist_beginD_date &&
+          images[value].artist_end_date && (
+            <Text align="center" style={{ fontSize: "15px" }}>
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                Artist Nationality:{" "}
+              </span>
+              {images[value].artist_nationality} |{" "}
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                Artist Date:{" "}
+              </span>
+              {images[value].artist_beginD_date} -{" "}
+              {images[value].artist_end_date}{" "}
+            </Text>
+          )}
 
-      <Flex justifyContent="center">
-        <Text align="center" style={{ fontSize: "15px" }}>
-          <span style={{ fontWeight: "bold", fontSize: "13px" }}>Date: </span>
-          c. {images[value].object_begin_date} - {images[value].object_end_date}{" "}
-        </Text>{" "}
-        {images[value].period && (
-          <Text
-            align="center"
-            style={{ fontSize: "15px", paddingLeft: "5px" }}
-          >
-            |{" "}
-            <span style={{ fontWeight: "bold", fontSize: "13px" }}>
-              Period:{" "}
-            </span>
-            {images[value].period}
-          </Text>
-        )}
-      </Flex>
+        <Flex justifyContent="center">
+          <Text align="center" style={{ fontSize: "15px" }}>
+            <span style={{ fontWeight: "bold", fontSize: "13px" }}>Date: </span>
+            c. {images[value].object_begin_date} -{" "}
+            {images[value].object_end_date}{" "}
+          </Text>{" "}
+          {images[value].period && (
+            <Text
+              align="center"
+              style={{ fontSize: "15px", paddingLeft: "5px" }}
+            >
+              |{" "}
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                Period:{" "}
+              </span>
+              {images[value].period}
+            </Text>
+          )}
+        </Flex>
 
-      <Flex justifyContent="center">
-        <Text align="center" style={{ fontSize: "15px" }}>
-          <span style={{ fontWeight: "bold", fontSize: "13px" }}>
-            Department:{" "}
-          </span>
-          {images[value].department}
-        </Text>
-        {images[value].culture && (
-          <Text
-            align="center"
-            style={{ fontSize: "15px", paddingLeft: "5px" }}
-          >
-            |
-            <span style={{ fontWeight: "bold", fontSize: "13px" }}>
-              {" "}
-              Culture:{" "}
-            </span>
-            {images[value].culture}
-          </Text>
-        )}
-      </Flex>
-    </Box>
-  </>
+        <Flex justifyContent="center">
+          {images[value].department && (
+            <Text align="center" style={{ fontSize: "15px" }}>
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                Department:{" "}
+              </span>
+              {images[value].department}
+            </Text>
+          )}
+          {images[value].culture && (
+            <Text
+              align="center"
+              style={{ fontSize: "15px", paddingLeft: "5px" }}
+            >
+              |
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                {" "}
+                Culture:{" "}
+              </span>
+              {images[value].culture}
+            </Text>
+          )}
+        </Flex>
+      </Box>
+    </>
   );
 };
 
 export default ImageItem;
 
-{/* <IconButton id={`${images[value].image_id}`} onClick={handleDeleteFavorite} aria-label="favorite" icon={<CloseIcon />} /> */}
+{
+  /* <IconButton id={`${images[value].image_id}`} onClick={handleDeleteFavorite} aria-label="favorite" icon={<CloseIcon />} /> */
+}

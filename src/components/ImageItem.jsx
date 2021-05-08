@@ -57,7 +57,7 @@ const ImageItem = ({ images }) => {
       toast({
         title: toastMessage.title,
         description: toastMessage.description,
-        status: "warning",
+        status: toastMessage.status,
         duration: toastMessage.duration,
         isClosable: true,
         position: "bottom-left",
@@ -108,16 +108,26 @@ const ImageItem = ({ images }) => {
     })
       .then((res) => res.text())
       .then((data) => {
-        title = "Success";
-        description = `${data}`;
-        duration = 9000;
-        setToastMessage({ title, description, duration });
+        if (data === "Favorite Saved") {
+          title = "Success";
+          description = `${data}`;
+          duration = 9000;
+          status = "success";
+          setToastMessage({ title, description, duration, status });
+        } else {
+          title = "error";
+          description = `${data}`
+          duration = 9000;
+          status = "error";
+          setToastMessage({ title, description, duration, status });
+        }
       })
       .catch((error) => {
         title = "error";
-        description = `${error.err}`;
+        description = "Favorite not saved"
         duration = 9000;
-        setToastMessage({ title, description, duration });
+        status = "error";
+        setToastMessage({ title, description, duration, status });
       });
   };
 
@@ -176,10 +186,15 @@ const ImageItem = ({ images }) => {
         boxShadow="lg"
         mt="15px"
       >
-        <Flex >
+        <Flex>
           <StarIcon
             onClick={(event) => handleAddFavorite(event)}
-            style={{ position: "absolute", margin:"7px", color:"#ebc765", fontSize:"15px"}}
+            style={{
+              position: "absolute",
+              margin: "7px",
+              color: "#ebc765",
+              fontSize: "15px",
+            }}
           />
         </Flex>
         <Text
@@ -242,12 +257,14 @@ const ImageItem = ({ images }) => {
         </Flex>
 
         <Flex justifyContent="center">
-          <Text align="center" style={{ fontSize: "15px" }}>
-            <span style={{ fontWeight: "bold", fontSize: "13px" }}>
-              Department:{" "}
-            </span>
-            {images[value].department}
-          </Text>
+          {images[value].department && (
+            <Text align="center" style={{ fontSize: "15px" }}>
+              <span style={{ fontWeight: "bold", fontSize: "13px" }}>
+                Department:{" "}
+              </span>
+              {images[value].department}
+            </Text>
+          )}
           {images[value].culture && (
             <Text
               align="center"
@@ -268,5 +285,3 @@ const ImageItem = ({ images }) => {
 };
 
 export default ImageItem;
-
-

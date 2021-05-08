@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import FavoriteItem from './FavoriteItem';
-import { Text } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 
 const FavoritesContainer = () => {
   const [images, setImages] = useState([])
@@ -30,8 +30,8 @@ const FavoritesContainer = () => {
   return (
     <>
       <NavBar displaySearch={true} />
-      <div>
-        {!images.length ? <Text>No Favorites</Text> :
+      <div >
+        {!images.length ? <Heading align="center" mt="200px">No Favorites Found</Heading>:
           < FavoriteItem images={images} toggle={toggle} setToggle={setToggle} setImages={setImages} />
         }
       </div>
