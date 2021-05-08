@@ -162,7 +162,7 @@ const ImageItem = ({ images, setToggle }) => {
             style={{
               position: "absolute",
               margin: "7px",
-              color: "#ebc765",
+              color: "black",
               fontSize: "15px",
             }}
           />
