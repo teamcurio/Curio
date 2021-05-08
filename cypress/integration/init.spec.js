@@ -9,12 +9,17 @@ describe('Cypress', () => {
     cy.visit('http://localhost:8080').contains('Curio'); 
   });
 
+  it('Check Login Route', () => {
+    cy.get('[href="/login"] > .chakra-text').click();
+  });
+
   it('Checks Input', () => {
-    cy.get('input[placeholder="Enter Search Term"]');
+    cy.pause();
+    cy.get('input[placeholder="Enter Search Term"]').type('rhino');
   }) 
 
   it('Search redirects to /images', () => {
-    cy.get('.chakra-input__right-element > a > .chakra-button').click();
+    cy.get('.chakra-button').click();
     cy.url().should('contain', '/images');
   });
 

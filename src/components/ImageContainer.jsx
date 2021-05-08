@@ -88,7 +88,11 @@ const ImageContainer = (props) => {
                   </Flex>
                 </div>
               );
-            if (error) console.log(error);
+              if (error) return (
+                <div style={{ marginTop: "200px", justifyItems: "center" }}>
+                  <Heading align="center">No Results Found</Heading>
+                </div>
+              );
             return (
               <>
                 <ImageItem images={data.Images.info} />
