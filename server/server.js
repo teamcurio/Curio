@@ -8,6 +8,7 @@ require("dotenv").config();
 //  Required routes:
 const authRouter = require("./routes/authRouter");
 const favoritesRouter = require("./routes/favoritesRouter");
+const { log } = require("console");
 
 const app = express();
 
@@ -25,16 +26,19 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// if (process.env.NODE_ENV === 'production'){
-//   console.log('here');
-//   app.use(express.static(path.join(__dirname, '../build')));
-//   app.get('/*', (req,res) => {
-//     return res.sendFile(path.join(__dirname, '../build/index.html'));
-//   });
-// }
+if (process.env.NODE_ENV === "production") {
+  console.log("here");
+  app.use(express.static(path.join(__dirname, "../dist")));
+  app.get("/*", (req, res) => {
+    return res.sendFile(path.join(__dirname, "../dist/index.html"));
+  });
+}
 
 //handle requests for static files
-app.use(express.static(path.join(__dirname, "../src")));
+else {
+  console.log("in Dev")
+  app.use(express.static(path.join(__dirname, "../src")));
+}
 
 // Define route handlers:
 app.use("*", (req, res, next) => {

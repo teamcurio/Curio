@@ -160,15 +160,16 @@ const ImageItem = ({ images, setToggle }) => {
         mt="15px"
       >
         <Flex>
-          <CloseIcon
-            onClick={handleDeleteFavorite}
-            style={{
-              position: "absolute",
-              margin: "7px",
-              color: "black",
-              fontSize: "15px",
-            }}
-          />
+          <Text _hover={{ color: "#ebc765" }}>
+            <CloseIcon
+              onClick={handleDeleteFavorite}
+              style={{
+                position: "absolute",
+                margin: "7px",
+                fontSize: "15px",
+              }}
+            />
+          </Text>
         </Flex>
         <Text
           align="center"
