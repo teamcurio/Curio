@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Flex, Spacer, Input, Stack, IconButton, Text } from "@chakra-ui/react";
+import { Flex, Spacer, Input, Stack, IconButton, Text , InputGroup, InputRightElement} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 const NavBar = (props) => {
@@ -80,37 +80,43 @@ const NavBar = (props) => {
       <Spacer />
       <Spacer />
       {props.displaySearch && (
-        <Stack direction={["column", "row"]}>
-          <Input
-            type="text"
-            _placeholder={{ color: "black" }}
-            align="center"
-            pr="4.5rem"
-            name="search"
-            borderColor="white"
-            bg="white"
-            color="black"
-            placeholder="Search"
-            onChange={handleSearchTerm}
-            size="xs"
-            mt="5px"
-          />
-          <Link to={{ pathname: "/images", state: { searchTerm } }}>
-            <IconButton
-              size="sm"
-              colorScheme="blackalpha"
-              type="submit"
-              aria-label="search"
-              icon={<SearchIcon />}
-              _hover={{ color: "#ebc765" }}
-              bg="black"
-              color="white"
-            />
-          </Link>
-        </Stack>
+        <form>
+          <InputGroup className="inputTerm" pr="3.5rem" >
+            <Stack direction={["column", "row"]}>
+              <Input
+                _placeholder={{ color: "black" }}
+                align="center"
+                pr="4rem"
+                name="search"
+                borderColor="white"
+                bg="white"
+                color="black"
+                placeholder="Search"
+                onChange={handleSearchTerm}
+                size="xs"
+                mt="5px"
+              />
+              <InputRightElement width="4.5rem">
+                <Link to={{ pathname: "/images", state: { searchTerm } }}>
+                  <IconButton
+                    size="xs"
+                    colorScheme="blackalpha"
+                    type="submit"
+                    aria-label="search"
+                    icon={<SearchIcon />}
+                    _hover={{ color: "#ebc765" }}
+                    bg="black"
+                    color="white"
+                  mb="5px"
+                  />
+                </Link>
+              </InputRightElement>
+            </Stack>
+          </InputGroup>
+        </form>
       )}
-      <Spacer></Spacer>
-      <Spacer></Spacer>
+      <Spacer/>
+      <Spacer/>
       {!isLoggedIn ? (
         <Link to="/login">
           <Text

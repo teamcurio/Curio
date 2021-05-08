@@ -144,6 +144,7 @@ const ImageItem = ({ images }) => {
               src={images[value].primaryImage}
               alt={images[value].title}
               boxSize="70vh"
+              objectFit="cover"
               size="500px"
               border="3px solid black"
               borderRadius="3"

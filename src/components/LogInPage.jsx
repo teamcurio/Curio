@@ -58,9 +58,14 @@ const LogIn = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(currentUser),
     })
-      .then((res) => {
+    .then((res) => {
+      if (res.status === 200) {
         return res.json();
-      })
+      }
+      return res.json().then((data) => {
+        throw data;
+      });
+    })
       .then((data) => {
         // console.log("data", data);
         localStorage.setItem("curioToken", data.token);

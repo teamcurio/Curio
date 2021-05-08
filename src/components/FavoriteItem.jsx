@@ -29,6 +29,9 @@ const ImageItem = ({ images, setToggle }) => {
   const decrementItem = () => {
     value === 0 ? setValue(images.length - 1) : setValue(value - 1);
   };
+  // const valueOnDelete = () => {
+  //   value === images.length -1 ? setValue(value - 1) : value
+  // }
 
   // SetInterval to move through array of images at a set timer
   useEffect(() => {

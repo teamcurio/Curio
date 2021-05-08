@@ -52,7 +52,7 @@ app.use("/favorites", favoritesRouter);
 app.use((err, req, res, next) => {
   const defaultError = {
     log: "Express error handler caught: Unknown Middleware Error",
-    status: 200,
+    status: 500,
     message: {
       err: "Unexpected Error Occurred",
     },
