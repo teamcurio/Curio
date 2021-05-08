@@ -93,7 +93,7 @@ const LogIn = () => {
               mb="100px"
               maxW="300px"
               py="20px"
-              rounded="5%"
+              borderRadius="3"
               bg='whitesmoke'
               boxShadow="dark-lg"
             >

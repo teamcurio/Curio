@@ -123,11 +123,6 @@ const ImageItem = ({ images }) => {
 
   return (
     <>
-      {/* <div style={{ marginTop: "50px", marginBottom: "30px" }}> */}
-      {/* <Text align="center" mt="40px" color="black">
-          {images[value].objectName}
-        </Text> */}
-      {/* </div> */}
       <div style={{ height: "70vh", marginTop: "20px" }}>
         <Flex color="white">
           <Square size="30vw" style={{ height: "60vh", paddingRight: "20px" }}>
@@ -172,8 +167,8 @@ const ImageItem = ({ images }) => {
 
       <Box
         backgroundColor="white"
-        width="30vw"
-        height="15vh"
+        width="33vw"
+        height="18vh"
         ml="auto"
         mr="auto"
         border="3px solid #ebc765"
@@ -181,11 +176,26 @@ const ImageItem = ({ images }) => {
         boxShadow="lg"
         mt="15px"
       >
+        <Flex >
+          <StarIcon
+            onClick={(event) => handleAddFavorite(event)}
+            style={{ position: "absolute", margin:"7px", color:"#ebc765", fontSize:"15px"}}
+          />
+        </Flex>
         <Text
           align="center"
           mt="7px"
+          mr="10px"
+          ml="18px"
           color="black"
-          style={{ fontWeight: "bold", fontSize: "18px" }}
+          style={{ fontWeight: "bold", fontSize: "15px" }}
+        >
+          {images[value].title}
+        </Text>
+        <Text
+          align="center"
+          color=" #ebc765"
+          style={{ fontWeight: "bold", fontSize: "12px" }}
         >
           {images[value].objectName}
         </Text>
@@ -259,14 +269,4 @@ const ImageItem = ({ images }) => {
 
 export default ImageItem;
 
-//  {/* <HStack justifyContent="space-between">
-//             {/* <Button align="left" onClick={toggleColorMode}>
-//               Toggle {colorMode === "light" ? "Dark" : "Light"}
-//             </Button> */}
-//             <IconButton
-//               id={`${images[value].objectID}`}
-//               onClick={(event) => handleAddFavorite(event)}
-//               aria-label="favorite"
-//               icon={<StarIcon />}
-//             />
-//           </HStack> */}
+
