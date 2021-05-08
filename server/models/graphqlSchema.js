@@ -27,6 +27,8 @@ const ImageType = new GraphQLObjectType({
     artistDisplayName: { type: GraphQLString },
     artistDisplayBio: { type: GraphQLString },
     artistNationality: { type: GraphQLString },
+    artistBeginDate: { type: GraphQLString },
+    artistEndDate: { type: GraphQLString },
     objectDate: { type: GraphQLString },
     objectBeginDate: { type: GraphQLInt },
     objectEndDate: { type: GraphQLInt },
@@ -60,7 +62,7 @@ const ImagesType = new GraphQLObjectType({
     objectIDs: { type: new GraphQLList(GraphQLInt) },
     info: {
       type: new GraphQLList(ImageType),
-      resolve (parent){
+      resolve(parent) {
         return parent.objectIDs.map(id => {
           return axios
             .get(
@@ -68,8 +70,9 @@ const ImagesType = new GraphQLObjectType({
             )
             .then((response) => {
               // console.log("Data", response.data)
-              return response.data}); 
-        })
+              return response.data;
+            });
+        });
       }
     }
   },
