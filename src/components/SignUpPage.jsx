@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import {
-  FormHelperText,
   FormControl,
   FormLabel,
   Button,
@@ -12,10 +11,8 @@ import {
   LightMode,
   Flex,
   useToast,
-  Heading,
-  VStack
 } from "@chakra-ui/react";
-import NavBar from './NavBar';
+import NavBar from "./NavBar";
 
 // import { useAuth } from "../useAuth";
 
@@ -89,10 +86,9 @@ const SignUp = () => {
           });
         })
         .then((data) => {
-          localStorage.setItem('curioToken', data.token);
-          localStorage.setItem('curioUser', data.user);
-          history.push('/')
-            ;
+          localStorage.setItem("curioToken", data.token);
+          localStorage.setItem("curioUser", data.user);
+          history.push("/");
         })
         .catch((error) => {
           title = "Error";
@@ -106,17 +102,23 @@ const SignUp = () => {
   return (
     <LightMode>
       <NavBar displaySearch={false} />
-      <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
+      <Flex
+        justifyContent="center"
+        h="100vh"
+        backgroundImage="url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)"
+        bgPosition="center"
+      >
         <Box>
           <Container
-            border="3px solid black"
+            border="2px solid black"
             margin="auto"
             mb="50px"
             mt="100px"
             maxW="300px"
             py="20px"
-            rounded="5%"
-            bg='whitesmoke'
+            borderRadius="3"
+            bg="whitesmoke"
+            boxShadow="dark-lg"
           >
             <Container marginBottom="1px solid silver" justifyContent="column">
               <form onSubmit={handleNewUserSubmit}>
@@ -126,12 +128,9 @@ const SignUp = () => {
                     onChange={handleAllInputChange}
                     id="email"
                     name="email"
-                    borderColor='black'
-                    color='black'
+                    borderColor="black"
+                    color="black"
                   />
-                  <FormHelperText fontSize="12px" id="email-helper-text">
-                    Your user account email address
-                </FormHelperText>
                 </FormControl>
                 <FormControl mt="10px" isRequired>
                   <FormLabel>Password:</FormLabel>
@@ -140,17 +139,14 @@ const SignUp = () => {
                     id="password"
                     type="password"
                     name="password"
-                    borderColor='black'
-                    color='black'
+                    borderColor="black"
+                    color="black"
                   />
                   {error.verifyPassword && (
                     <Text id="mismatchedPassword" fontSize="8px">
                       {error.verifyPassword}
                     </Text>
                   )}
-                  <FormHelperText fontSize="12px" id="password-helper-text">
-                    Set up a password
-                </FormHelperText>
                 </FormControl>
                 <FormControl mt="10px" isRequired>
                   <FormLabel>Confirm Password:</FormLabel>
@@ -159,49 +155,42 @@ const SignUp = () => {
                     id="confirmedUserPassword"
                     type="password"
                     name="confirmedUserPassword"
-                    borderColor='black'
-                    color='black'
+                    borderColor="black"
+                    color="black"
                   />
                   {error.verifyPassword && (
                     <Text id="mismatchedPassword" fontSize="8px">
                       {error.verifyPassword}
                     </Text>
                   )}
-                  <FormHelperText fontSize="12px" id="password-helper-text">
-                    Set up a password
-                </FormHelperText>
                 </FormControl>
                 <Flex>
                   <Button
                     ml="auto"
-                    mr='auto'
+                    mr="auto"
                     mt={4}
                     type="submit"
-                    background='#ebc765'
+                    background="#ebc765"
                     color="black"
-                    _hover={{ color: 'white', background: "black" }}
+                    _hover={{ color: "white", background: "black" }}
                   >
                     Sign Up
-              </Button>
+                  </Button>
                 </Flex>
               </form>
             </Container>
             <Container>
-              {/* <Flex ml="30px" maxW="180px" justifyContent="space-between"> */}
-              <Flex justifyContent='space-evenly' padding={5}>
-                <Text fontSize='12px'>Have an account?</Text>
-                <NavLink to="/login">
-                  <Text fontSize="12px" textDecoration='underline'>
-                    Log In
+              <Flex mt="15px" justifyContent="center">
+                <Text fontSize="12px" mr="5px">
+                  Have an account?
                 </Text>
+                <NavLink to="/login">
+                  <Text fontSize="12px" textDecoration="underline">
+                    Log In
+                  </Text>
                 </NavLink>
               </Flex>
             </Container>
-            {/* <NavLink to='/'>
-              <Text align='center' textDecoration='underline'>
-                Return to Home Page
-              </Text>
-            </NavLink> */}
           </Container>
         </Box>
       </Flex>

@@ -5,9 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import LandingPage from './CurioLandingPage';
 import LogIn from './LogInPage';
 import SignUp from './SignUpPage';
-import NavBar from './NavBar';
 import ImageContainer from './ImageContainer';
-import favorites from './favorites';
 import FavoritesContainer from "./FavoritesContainer";
 
 const client = new ApolloClient({

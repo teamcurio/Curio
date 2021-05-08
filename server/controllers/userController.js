@@ -37,7 +37,7 @@ userController.createUser = async (req, res, next) => {
 
   db.query(createUserQuery, values)
     .then((response) => {
-      console.log("response", response);
+      // console.log("response", response);
       const { id, email } = response.rows[0];
       res.locals.user = { id, email };
       return next();

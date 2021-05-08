@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require("axios");
 const {
   GraphQLObjectType,
   GraphQLInt,
@@ -6,13 +6,13 @@ const {
   GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
-} = require('graphql');
+} = require("graphql");
 
 // const { ModuleFilenameHelpers } = require("webpack");
 
 //Image Type
 const ImageType = new GraphQLObjectType({
-  name: 'Image',
+  name: "Image",
   fields: () => ({
     objectID: { type: GraphQLInt },
     accessionYear: { type: GraphQLString },
@@ -39,7 +39,7 @@ const ImageType = new GraphQLObjectType({
 
 //Constituents Type
 const ConstituentsType = new GraphQLObjectType({
-  name: 'Constituents',
+  name: "Constituents",
   fields: () => ({
     constituentID: { type: GraphQLInt },
     name: { type: GraphQLString },
@@ -48,7 +48,7 @@ const ConstituentsType = new GraphQLObjectType({
 
 //Tag type
 const TagType = new GraphQLObjectType({
-  name: 'Tag',
+  name: "Tag",
   fields: () => ({
     term: { type: GraphQLString },
   }),
@@ -56,14 +56,14 @@ const TagType = new GraphQLObjectType({
 
 //Images type
 const ImagesType = new GraphQLObjectType({
-  name: 'Images',
+  name: "Images",
   fields: {
     total: { type: GraphQLInt },
     objectIDs: { type: new GraphQLList(GraphQLInt) },
     info: {
       type: new GraphQLList(ImageType),
       resolve(parent) {
-        return parent.objectIDs.map(id => {
+        return parent.objectIDs.map((id) => {
           return axios
             .get(
               `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
@@ -73,14 +73,14 @@ const ImagesType = new GraphQLObjectType({
               return response.data;
             });
         });
-      }
-    }
+      },
+    },
   },
 });
 
 //Root Query
 const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
+  name: "RootQueryType",
   fields: {
     Images: {
       type: ImagesType,
