@@ -29,10 +29,11 @@ const LandingPage = () => {
     <div>
       <NavBar displaySearch={false} />
 
-      <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)'>
-        <VStack margin='auto' spacing={1} direction="row" align="center" padding="4">
+      {/* <Flex justifyContent="center" h='100vh'> */}
+      <Flex justifyContent="center" h='100vh' backgroundImage='url(https://images.metmuseum.org/CRDImages/as/original/DP251139.jpg)' bgPosition="center">
+        <VStack margin='auto' spacing={1} direction="row" align="center" padding="4" >
           <Heading margin='auto' size='4xl'>Curio</Heading>
-          <Text>A personally curated art experience</Text>
+          <Text style={{fontWeight:"bold", padding:"5px"}}>A personally curated art experience</Text>
           <Box>
             <form>
               <InputGroup className='inputTerm' size="md" pr="4.5rem">
@@ -45,10 +46,11 @@ const LandingPage = () => {
                   color='black'
                   placeholder='Enter Search Term'
                   onChange={handleSearchTerm}
+                  _hover={{ color: 'black' }}
                 />
                 <InputRightElement width="4.5rem">
                   <Link to={{ pathname: "/images", state: { searchTerm } }} >
-                    <IconButton type='submit' aria-label="search" icon={<SearchIcon />} />
+                    <IconButton type='submit' aria-label="search" icon={<SearchIcon />} _hover={{ color: '#ebc765' }} bg='black' color="white"/>
                   </Link>
                 </InputRightElement>
                 {/* </FormControl> */}

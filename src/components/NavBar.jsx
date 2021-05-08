@@ -47,7 +47,7 @@ const NavBar = (props) => {
 
   console.log(localStorage.getItem('curioUser'))
   return (
-    <Flex width='100%' color='white' h='40px' bg='black' border='solid' borderBottomRadius='15px' justifyContent='center' style={{ marginTop: "0px" }}>
+    <Flex width='100%' color='white' h='40px' bg='black'  padding="5px" boxShadow="dark-lg" justifyContent='center' style={{ marginTop: "0px" }}>
       {localStorage.getItem('curioUser') ? (<Link to='/favorites'>
         <Button float='left' type="submit" bg='black' color='white' justifyContent='center' height='30px' _hover={{ color: '#ebc765' }}>
           Favorites

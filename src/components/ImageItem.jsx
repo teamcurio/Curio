@@ -123,47 +123,49 @@ const ImageItem = ({ images }) => {
           {images[value].objectName}
         </Text> */}
       {/* </div> */}
-      <div style={{ height: "60vh" }}>
+      <div style={{ height: "70vh", marginTop: "20px" }}>
         <Flex color="white">
-          <Square size="30vw" style={{ marginLeft: "0px", paddingLeft: "0px", height: "60vh", align: "right" }}>
+        <Square size="30vw" style={{ height: "60vh", paddingRight: "20px" }}>
             <Box flex="1" align="right" >
               <IconButton
                 aria-label="favorite"
                 icon={<ArrowBackIcon style={{ color: "black" }} />}
-                onClick={incrementItem}
+                onClick={decrementItem}
                 boxSize="60px"
               />
             </Box>
           </Square>
-          <Box flex="1" align="center" size="40vw">
+          <Box flex="1" align="center" size="40vw" >
             <Image
               src={images[value].primaryImage}
               alt={images[value].title}
-              boxSize="60vh"
-              size="475px"
+              boxSize="70vh"
+              size="500px"
+              // width="60vw"
             />
           </Box>
-          <Square size="30vw" style={{ height: "60vh" }}>
+          <Square size="30vw" style={{ height: "60vh", paddingLeft: "20px" }}>
             <Box flex="1" align="left" >
               <IconButton
                 aria-label="favorite"
                 icon={<ArrowForwardIcon style={{ color: "black" }} />}
-                onClick={decrementItem}
+                onClick={incrementItem}
                 boxSize="60px"
               />
             </Box>
           </Square>
         </Flex>
       </div>
-      <div style={{ marginTop: "10px" }}>
+      <div style={{ marginTop: "40px" }}>
         <Box
           backgroundColor="white"
           border="1px solid black"
           backgroundSize="cover"
           width="30vw"
-          height="30vh"
+          height="15vh"
           ml="auto"
           mr="auto"
+          boxShadow="dark-lg" p="6" rounded="md"
         >
           <VStack>
             <Text align="center">{images[value].artistDisplayName} </Text>
