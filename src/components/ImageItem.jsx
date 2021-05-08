@@ -179,15 +179,16 @@ const ImageItem = ({ images }) => {
         mt="15px"
       >
         <Flex>
-          <StarIcon
-            onClick={(event) => handleAddFavorite(event)}
-            style={{
-              position: "absolute",
-              margin: "7px",
-              color: "black",
-              fontSize: "15px",
-            }}
-          />
+          <Text _hover={{ color: "#ebc765" }}>
+            <StarIcon
+              onClick={(event) => handleAddFavorite(event)}
+              style={{
+                position: "absolute",
+                margin: "7px",
+                fontSize: "15px",
+              }}
+            />
+          </Text>
         </Flex>
         <Text
           align="center"
